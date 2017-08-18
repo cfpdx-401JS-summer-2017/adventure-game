@@ -9,13 +9,13 @@ class App extends Component {
     super(props);
 
     this.state = {
-      acts,
-      act: acts.mausoleum,
+      // status: 'intro', //'active', 'game-over'
+      act: 0,
       scene: 0,
       moves: [],
       player: {
         lives: 3,
-        // inventory: [],
+        coins: 0,
       },
     }
 
@@ -23,30 +23,29 @@ class App extends Component {
   }
 
   handleMove(move) {
-    console.log('USER PICKED', move);
-    let correct = this.state.act.scenes[this.state.scene].correct;
-    console.log('CORRECT MOVE', correct);
+    console.log('user picked', move);
+    let correct = acts[this.state.act].scenes[this.state.scene].correct;
 
     if (move === correct) {
-      alert('you clicked the correct move');
-      
-      if(this.state.scene < this.state.act.scenes.length) {
-        alert('you are are moving to the next scene');
-        let nextScene = this.state.scene + 1;
-        this.setState({ scene: nextScene })
-
+      if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
+        // go to next scene
+        let scene = this.state.scene + 1;
+        this.setState({ scene })
       } else {
-        alert('you are moving on to next act');
-
+        // go to next act
+        let act = this.state.act + 1;
+        this.setState({ act, scene: 0 })
       }
 
     } else {
-      alert('you clicked the death move');
-      // check number of lives
-      
-        // remove a life
-
-        // end game
+      if(this.state.player.lives > 0) {
+        // take away a life
+        let lives = this.state.player.lives - 1;
+        this.setState({ player: { lives, coins: 0 } })
+      } else {
+        //TODO: 
+        alert('game over!');
+      }
     }
 
   }
@@ -59,8 +58,11 @@ class App extends Component {
           <img src={logo} alt="logo" />
           <h2>Save Princess Daphne!</h2>
 
-          <p>{this.state.act.name}</p>
-          <p>{this.state.act.scenes[this.state.scene].instructions}</p>
+          <PlayerStatus lives={this.state.player.lives} coins={this.state.player.coins} />
+
+          <p>Act: {acts[this.state.act].name}</p>
+          <p>Scene: {this.state.scene + 1}</p>
+          <p>{acts[this.state.act].scenes[this.state.scene].instructions}</p>
 
           <div>
             <MoveButton label="up" value="UP"
@@ -91,6 +93,23 @@ function MoveButton({ label, value, onClick }) {
       {label}
     </button>
   );
+}
+
+function PlayerStatus({ lives, coins }) {
+  return (
+    <table>
+      <tbody>
+        <tr>
+          <th>Lives</th>
+          <th>Coins</th>
+        </tr>
+        <tr>
+          <td>{lives}</td>
+          <td>{coins}</td>
+        </tr>
+      </tbody>
+    </table>
+  )
 }
 
 export default App;
