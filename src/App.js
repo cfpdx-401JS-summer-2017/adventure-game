@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import rooms from './modules/rooms'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      rooms: [],
+      rooms: rooms,
+      room: {key:'start'},
       items: [],
       player : {
         name: 'Percy Prankster',
         inventory: []
       }
-
     }
     this.handleExit = this.handleExit.bind(this);
     this.handlePickup = this.handlePickup.bind(this);
 
   }
 
-
-
-handleExit() {
+  handleExit() {
   this.setState({ room });
 
 }
@@ -42,7 +41,7 @@ handlePickup() {
 
 
     render() {
-      const { player, rooms } = this.state;
+      const { player, room } = this.state;
       console.log(player, rooms);
       return (
         <div className="App">
@@ -51,13 +50,33 @@ handlePickup() {
             <h6>{player.name}</h6>
             <h6>{player.inventory.join(', ')}</h6>
           </div>
-          <Room room={rooms[0]}
+          <Room room={room}
             onExit={this.handleExit}
             onPickup={this.handlePickup}
           />
         </div>
       );
     }
+}
+
+function Room({ room, onExit, onPickup }) {
+  return (
+    <div>
+      <h2>{room.name}</h2>
+      <p>You see: { room.items.map((item, i) => (
+        <button key={i} onClick={() => onPickup(item)}>
+            {item}
+        </button>
+      )) }</p>
+      {room.doors.map((door, i) => {
+        return (
+          <button key={i} onClick={() => onExit(door)}>
+            Door to {door.key}
+          </button>
+        );
+      })}
+    </div>
+  );
 }
 
 export default App;
