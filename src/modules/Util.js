@@ -1,3 +1,7 @@
+import React from 'react';
+import utils from './utils';
+
+
 export function loadingScreen() {
   return (
     <div>Welcome to the game.</div>

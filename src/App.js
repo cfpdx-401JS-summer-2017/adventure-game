@@ -6,8 +6,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      room: rooms[0],
-      items: item [],
+      room: [],
+      items: [],
       player : {
         name: 'Percy Prankster',
         inventory: []
