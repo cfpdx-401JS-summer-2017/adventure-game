@@ -1,0 +1,39 @@
+/*
+red     rgb(182, 7, 45);
+orange  rgb(230, 118, 51);
+yellow  rgb(244, 186, 51);
+black   rgb(29, 29, 27);
+*/
+
+
+.main {
+  min-height: 100vh;
+  text-align: center;
+  background-color: #222;
+  padding: 20px;
+  color: white;
+}
+
+button {
+  font-size: 1.5rem;
+  margin: .25rem;
+  color: rgb(29, 29, 27);
+  border: 4px solid rgb(29, 29, 27);
+  border-radius: 6px;
+  background: linear-gradient(to bottom, rgb(182, 7, 45) 0%, rgb(230, 118, 51) 50%, rgb(244, 186, 51) 100%);
+
+}
+
+button:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+
+button:focus {
+  outline: none;
+}
+
+table {
+  margin: 0 auto;
+  text-align: center;
+  border: 1px solid white;
+}
