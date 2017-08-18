@@ -1,5 +1,5 @@
 const player = {
   key: 'player',
-  name: 'Percy Prankster'
+  name: 'Percy Prankster',
   items: []
 }

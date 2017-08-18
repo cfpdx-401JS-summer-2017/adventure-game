@@ -22,11 +22,20 @@ class App extends Component {
 
 
 handleExit() {
+  this.setState({ room });
 
 }
 
 handlePickup() {
+  const { room, player } = this.state;
+  const index = room.items.indexOf(item);
+  if(index > -1) room.items.splice(index, 1);
 
+  player.inventory.push(item);
+
+  this.setState({
+    room, player
+  })
 }
 
 
