@@ -1,56 +1,56 @@
 const playground = {
   key: 'playground',
   name: 'Playground',
-  items: [],
+  items: ['cellPhone'],
   doors: ['gym']
 }
 
 const cafeteria = {
   key: 'cafeteria',
   name: 'Food Trough',
-  items: [],
+  items: ['cellPhone'],
   doors: ['eastHall', 'westHall', 'gym']
 }
 
 const gym = {
   key: 'gym',
   name: 'Gym',
-  items: [],
+  items: ['cellPhone'],
   doors: ['eastHall', 'cafeteria', 'playground']
 }
 
 const eastHall = {
   key: 'eastHall',
   name: 'East Hall',
-  items: [],
+  items: ['cellPhone'],
   doors: ['gym', 'office', 'cafeteria', 'westHall','artRoom']
 }
 
 const westHall = {
   key: 'westHall',
   name: 'West Hall',
-  items: [],
+  items: ['cellPhone'],
   doors: ['cafeteria', 'mathRoom', 'eastHall']
 }
 
 const mathRoom = {
   key: 'mathRoom',
   name: 'Algebra for Everyone',
-  items: [],
+  items: ['cellPhone'],
   doors: ['westHall', 'artRoom']
 }
 
 const artRoom = {
   key: 'artRoom',
   name: 'Painting for People',
-  items: [],
+  items: ['cellPhone'],
   doors: ['mathRoom', 'eastHall']
 }
 
 const office = {
   key: 'office',
   name: 'Principal\'s Office',
-  items: [],
+  items: ['cellPhone'],
   doors: ['eastHall']
 
 }

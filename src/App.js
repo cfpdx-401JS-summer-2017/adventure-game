@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import rooms from './modules/rooms'
 import './App.css';
+import items from './modules/items'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       rooms: rooms,
-      room: {key:'start'},
+      room: rooms[0],
       items: [],
       player : {
         name: 'Percy Prankster',
@@ -20,12 +21,12 @@ class App extends Component {
 
   }
 
-  handleExit() {
+  handleExit(room) {
   this.setState({ room });
 
 }
 
-handlePickup() {
+handlePickup(item) {
   const { room, player } = this.state;
   const index = room.items.indexOf(item);
   if(index > -1) room.items.splice(index, 1);
