@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './img/icon-dragons-lair-logo-512x512.png';
 import './App.css';
-import rooms from './rooms.js'
+import acts from './acts.js'
 
 class App extends Component {
 
@@ -9,8 +9,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      rooms,
-      room: rooms[0],
+      acts,
+      act: acts.mausoleum,
+      scene: 0,
       moves: [],
       player: {
         lives: 3,
@@ -18,30 +19,38 @@ class App extends Component {
       },
     }
 
-    this.handleCorrectMove = this.handleCorrectMove.bind(this);
-    this.handleDeathMove = this.handleDeathMove.bind(this);
+    this.handleMove = this.handleMove.bind(this);
   }
 
   handleMove(move) {
-    //not sure if this will work
-    // let newMoves = this.state.moves;
-    // newMoves.push(move);
-    // this.setState({ moves: newMoves });
+    console.log('USER PICKED', move);
+    let correct = this.state.act.scenes[this.state.scene].correct;
+    console.log('CORRECT MOVE', correct);
 
-    alert('you clicked ' + move);
-    //evaulate
+    if (move === correct) {
+      alert('you clicked the correct move');
+      
+      if(this.state.scene < this.state.act.scenes.length) {
+        alert('you are are moving to the next scene');
+        let nextScene = this.state.scene + 1;
+        this.setState({ scene: nextScene })
+
+      } else {
+        alert('you are moving on to next act');
+
+      }
+
+    } else {
+      alert('you clicked the death move');
+      // check number of lives
+      
+        // remove a life
+
+        // end game
+    }
+
   }
 
-  // handleCorrectMove(move) {
-  //   console.log('correct move!');
-  //   // this.setState({})
-  // }
-
-  // handleDeathMove(move) {
-  //   console.log('death move!');
-  // }
-
-  // handlePickup(item) { }
 
   render() {
     return (
@@ -50,11 +59,25 @@ class App extends Component {
           <img src={logo} alt="logo" />
           <h2>Save Princess Daphne!</h2>
 
-          <p>text will go here...</p>
+          <p>{this.state.act.name}</p>
+          <p>{this.state.act.scenes[this.state.scene].instructions}</p>
 
-          <MoveButton label="up" value="U"
-           onClick = {this.handleMove.bind(this)} />
+          <div>
+            <MoveButton label="up" value="UP"
+            onClick = {this.handleMove.bind(this)} />
+            
+            <MoveButton label="down" value="DOWN"
+            onClick = {this.handleMove.bind(this)} />
 
+            <MoveButton label="right" value="RIGHT"
+            onClick = {this.handleMove.bind(this)} />
+
+            <MoveButton label="left" value="LEFT"
+            onClick = {this.handleMove.bind(this)} />
+
+            <MoveButton label="sword" value="SWORD"
+            onClick = {this.handleMove.bind(this)} />
+          </div>
 
         </div>
       </div>
