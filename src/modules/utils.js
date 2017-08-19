@@ -1,5 +1,4 @@
-export function randomInt() {
-
+export function randomItemAssigner(min, max) {
 
 }
 

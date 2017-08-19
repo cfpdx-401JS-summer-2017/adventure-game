@@ -1,66 +1,84 @@
+import gameItems from './items'
+
 const playground = {
   key: 'playground',
   name: 'Playground',
-  items: ['cellPhone'],
+  items: [],
   doors: ['gym']
 }
 
 const cafeteria = {
   key: 'cafeteria',
   name: 'Food Trough',
-  items: ['cellPhone'],
+  items: [],
   doors: ['eastHall', 'westHall', 'gym']
 }
 
 const gym = {
   key: 'gym',
   name: 'Gym',
-  items: ['cellPhone'],
+  items: [],
   doors: ['eastHall', 'cafeteria', 'playground']
 }
 
 const eastHall = {
   key: 'eastHall',
   name: 'East Hall',
-  items: ['cellPhone'],
+  items: [],
   doors: ['gym', 'office', 'cafeteria', 'westHall','artRoom']
 }
 
 const westHall = {
   key: 'westHall',
   name: 'West Hall',
-  items: ['cellPhone'],
+  items: [],
   doors: ['cafeteria', 'mathRoom', 'eastHall']
 }
 
 const mathRoom = {
   key: 'mathRoom',
   name: 'Algebra for Everyone',
-  items: ['cellPhone'],
+  items: [],
   doors: ['westHall', 'artRoom']
 }
 
 const artRoom = {
   key: 'artRoom',
   name: 'Painting for People',
-  items: ['cellPhone'],
+  items: [],
   doors: ['mathRoom', 'eastHall']
 }
 
 const office = {
   key: 'office',
   name: 'Principal\'s Office',
-  items: ['cellPhone'],
+  items: [],
   doors: ['eastHall']
 
 }
 
-const rooms = [office, cafeteria, gym, westHall, eastHall, artRoom, mathRoom, playground]
+const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground]
+let maxItm = 3
+let minItm = 1
+
 
 rooms.forEach(room => {
+  let roomItems = gameItems
+  room.items = (room) => {
+    let numbOfItems = Math.random()* (maxItm-minItm) + minItm
+    
+    for(let i = 0; i <= numbOfItems; i++) {
+      let randomIndex = Math.random()* (roomItems.length-0)
+      room.items.push(roomItems[randomIndex])
+      roomItems.splice(randomIndex,1);
+    }
+    console.log(roomItems)
+    return roomItems
+  }
   room.doors = room.doors.map(door => {
       return rooms.find(r => r.key === door);
   });
+  return room
 });
 
 

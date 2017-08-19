@@ -12,5 +12,5 @@ const homework = {
   key: 'homework',
   name: 'Math Homework'
 }
-const items = [cellphone, homework, hallPass];
-export default items;
+const gameItems = [cellphone, homework, hallPass];
+export default gameItems;

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import rooms from './modules/rooms'
 import './App.css';
-import items from './modules/items'
+import gameItems from './modules/items'
 
 class App extends Component {
   constructor(props) {
@@ -10,8 +10,12 @@ class App extends Component {
     this.state = {
       rooms: rooms,
       room: rooms[0],
-      items: [],
-      player : {
+      gameItems: gameItems,
+      item: {
+        key: '',
+        name: ''
+      } ,
+      player: {
         name: 'Percy Prankster',
         inventory: []
       }
@@ -31,7 +35,7 @@ handlePickup(item) {
   const index = room.items.indexOf(item);
   if(index > -1) room.items.splice(index, 1);
 
-  player.inventory.push(items);
+  player.inventory.push(item);
 
   this.setState({
     room, player
@@ -61,10 +65,11 @@ handlePickup(item) {
 }
 
 function Room({ room, onExit, onPickup }) {
+  console.log(room)
   return (
     <div>
       <h2>{room.name}</h2>
-      <p>You see: { room.items.map((item, i) => (
+      <p>You see: { room.items().map((item, i) => (
         <button key={i} onClick={() => onPickup(item)}>
             {item}
         </button>
