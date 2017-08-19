@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './img/icon-dragons-lair-logo-512x512.png';
 import './App.css';
+import { Splash } from './game/splash.js'
 import acts from './acts.js'
 
 class App extends Component {
@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      // status: 'intro', //'active', 'game-over'
+      gameStatus: 'splash', //'active', 'game-over'
       act: 0,
       scene: 0,
       moves: [],
@@ -52,64 +52,9 @@ class App extends Component {
 
 
   render() {
-    return (
-      <div>
-        <div className="main">
-          <img src={logo} alt="logo" />
-          <h2>Save Princess Daphne!</h2>
-
-          <PlayerStatus lives={this.state.player.lives} coins={this.state.player.coins} />
-
-          <p>Act: {acts[this.state.act].name}</p>
-          <p>Scene: {this.state.scene + 1}</p>
-          <p>{acts[this.state.act].scenes[this.state.scene].instructions}</p>
-
-          <div>
-            <MoveButton label="up" value="UP"
-            onClick = {this.handleMove.bind(this)} />
-            
-            <MoveButton label="down" value="DOWN"
-            onClick = {this.handleMove.bind(this)} />
-
-            <MoveButton label="right" value="RIGHT"
-            onClick = {this.handleMove.bind(this)} />
-
-            <MoveButton label="left" value="LEFT"
-            onClick = {this.handleMove.bind(this)} />
-
-            <MoveButton label="sword" value="SWORD"
-            onClick = {this.handleMove.bind(this)} />
-          </div>
-
-        </div>
-      </div>
-    );
+    if(this.state.state === 'splash') return Splash;
+    if(this.state.state === 'splash') return Splash;
   }
-}
-
-function MoveButton({ label, value, onClick }) {
-  return (
-    <button value={value} onClick={() => onClick(value)} >
-      {label}
-    </button>
-  );
-}
-
-function PlayerStatus({ lives, coins }) {
-  return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Lives</th>
-          <th>Coins</th>
-        </tr>
-        <tr>
-          <td>{lives}</td>
-          <td>{coins}</td>
-        </tr>
-      </tbody>
-    </table>
-  )
 }
 
 export default App;
