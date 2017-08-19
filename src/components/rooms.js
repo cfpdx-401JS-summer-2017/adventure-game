@@ -1,10 +1,9 @@
-// create our rooms
 
 const rooms = [
     {
         key: 0,
         directions: ['right'],
-        items: [],
+        items: ['fish'],
         characters: []
     },
     {
@@ -28,8 +27,8 @@ const rooms = [
     {
         key: 4,
         directions: ['up'],
-        items: [],
-        characters: []
+        items: ['key'],
+        characters: ['panda']
     },
     {
         key: 5,
@@ -40,14 +39,14 @@ const rooms = [
     {
         key: 6,
         directions: ['up'],
-        items: [],
+        items: ['bahn mi'],
         characters: []
     },
     {
         key: 7,
         directions: ['down'],
-        items: [],
-        characters: []
+        items: ['bamboo'],
+        characters: ['penguin']
     },
     {
         key: 8,
@@ -82,7 +81,7 @@ const rooms = [
     {
         key: 13,
         directions: ['right', 'left'],
-        items: [],
+        items: ['locked door'],
         characters: []
     },
     {
@@ -95,7 +94,8 @@ const rooms = [
         key: 15,
         directions: ['down'],
         items: [],
-        characters: []
+        characters: ['tiger']
     }
 ];
 
+export default rooms;
