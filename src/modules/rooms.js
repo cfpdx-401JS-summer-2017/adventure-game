@@ -61,20 +61,21 @@ const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, pl
 let maxItm = 3
 let minItm = 1
 
+function propagateItems(room) {
+  let roomItems = gameItems
+  let numbOfItems = Math.random()* (maxItm-minItm) + minItm
+  
+  for(let i = 0; i <= numbOfItems; i++) {
+    let randomIndex = Math.random()* (roomItems.length-0)
+    roomItems.push(roomItems[randomIndex])
+    roomItems.splice(randomIndex,1);
+  }
+  console.log(roomItems)
+  return roomItems
+}
 
 rooms.forEach(room => {
-  let roomItems = gameItems
-  room.items = (room) => {
-    let numbOfItems = Math.random()* (maxItm-minItm) + minItm
-    
-    for(let i = 0; i <= numbOfItems; i++) {
-      let randomIndex = Math.random()* (roomItems.length-0)
-      room.items.push(roomItems[randomIndex])
-      roomItems.splice(randomIndex,1);
-    }
-    console.log(roomItems)
-    return roomItems
-  }
+  room.items = propagateItems(room)
   room.doors = room.doors.map(door => {
       return rooms.find(r => r.key === door);
   });

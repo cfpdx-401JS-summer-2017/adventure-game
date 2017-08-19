@@ -69,7 +69,7 @@ function Room({ room, onExit, onPickup }) {
   return (
     <div>
       <h2>{room.name}</h2>
-      <p>You see: { room.items().map((item, i) => (
+      <p>You see: { room.items.map((item, i) => (
         <button key={i} onClick={() => onPickup(item)}>
             {item}
         </button>
