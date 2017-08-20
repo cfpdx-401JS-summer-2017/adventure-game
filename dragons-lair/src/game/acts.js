@@ -9,51 +9,46 @@ const X = 'NONE';
 // const DR = 'DOWN-RIGHT';
 // const DS = 'DOWN-SWORD'
 
-const acts = {
-
-    //STILL WORKING ON THIS
-
-    ropes: {
+const acts = [
+    {
         name: 'Ropes',
+        instructions: 'Which way to swing?',
         scenes: [
             { correct: R },
             { correct: R },
             { correct: R },
             { correct: R }
         ]
-    },
-
-    bedroom: {
+    },{
         name: 'Bedroom',
+        instructions: 'Someone is coming!',
         scenes: [{ correct: U }],
-    },
-    
-    wizardsKitchen: {
+    },{
         name: 'Wizard\'s Kitchen',
-        scenes: [{ correct: R, buzz: S, instructions: 'Do you want to drink the potion? Choose RIGHT for yes, or LEFT for no' }]
-    },
-    mausoleum: {
+        instructions: 'Do you want to drink the potion? Choose RIGHT for yes, or LEFT for no',
+        scenes: [{ correct: R, buzz: S }]
+    },{
         name: 'Mausoleum',
+        instructions: 'Skulls and bones are trying to get you!',
         scenes: [
-            { correct: U, buzz: X, instructions: 'Bones are trying to get you!'},
-            { correct: S, buzz: R, instructions: 'Skulls are trying to get you!'},
+            { correct: U, buzz: X },
+            { correct: S, buzz: R },
             { correct: U, buzz: S },
             { correct: S, buzz: L },
             { correct: L, buzz: U }, //U S
             { correct: S, buzz: X }
         ]
-    },
-    vestibule: {
+    },{
         name: 'Vestibule',
+        instructions: 'The ceiling is crumbling on top of you!',
         scenes: [
-            { correct: D, buzz: S, instructions: 'The ceiling is crumbling next to you!'}, // D R
-            { correct: R, buzz: D, instructions: 'The ceiling is crumbling on top of you!' } //D S
+            { correct: D, buzz: S }, // D R
+            { correct: R, buzz: D } //D S
         ]
-    },
-
-    //FINAL ACT!!
-    dragonslair: {
+    },{
+        //FINAL ACT!!
         name: 'Dragon\'s Lair',
+        instructions: 'Fight the dragon and save Princess Daphne from the bubble!',
         scenes: [
             { correct: L },	
             { correct: L },
@@ -73,8 +68,6 @@ const acts = {
             //buzz: U D R S	D	U D R S	U R	 	 	 	U S	D L S	U D L	 	D S	 	U D L R
         ]
     }
-    
+];
 
-}
-
-export default [acts.ropes, acts.bedroom, acts.vestibule, acts.wizardsKitchen, acts.mausoleum, acts.dragonsLair];
+export default acts;

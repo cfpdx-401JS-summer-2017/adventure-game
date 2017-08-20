@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import logo from './img/icon-dragons-lair-logo-512x512.png';
 import './App.css';
-import acts from './acts.js'
+import { Splash } from './game/splash.js'
+import acts from './game/acts.js'
+import { Game } from './game/game.js'
+import { GameOver } from './game/game-over.js'
+
+console.log('ANSWERS:', acts); // keep this for testing
 
 class App extends Component {
 
@@ -9,10 +13,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      // status: 'intro', //'active', 'game-over'
+      gameStatus: 'splash', //'active', 'game-over'
       act: 0,
       scene: 0,
-      moves: [],
       player: {
         lives: 3,
         coins: 0,
@@ -20,10 +23,10 @@ class App extends Component {
     }
 
     this.handleMove = this.handleMove.bind(this);
+    this.newGame = this.newGame.bind(this);
   }
 
   handleMove(move) {
-    console.log('user picked', move);
     let correct = acts[this.state.act].scenes[this.state.scene].correct;
 
     if (move === correct) {
@@ -40,76 +43,47 @@ class App extends Component {
     } else {
       if(this.state.player.lives > 0) {
         // take away a life
+        // let soundOfDeath = new Audio('./sounds/death.mp3');
+        // soundOfDeath.play();
+        
         let lives = this.state.player.lives - 1;
         this.setState({ player: { lives, coins: 0 } })
       } else {
-        //TODO: 
-        alert('game over!');
+        // go to game over
+        this.setState({ gameStatus: "game-over"});
       }
     }
 
   }
 
+  newGame() {
+    this.setState({
+      gameStatus: 'active',
+      act: 0,
+      scene: 0,
+      player: {
+        lives: 3,
+        coins: 0,
+      }
+    });
+  }
 
   render() {
-    return (
-      <div>
-        <div className="main">
-          <img src={logo} alt="logo" />
-          <h2>Save Princess Daphne!</h2>
+    if(this.state.gameStatus === 'splash') return <Splash handleClick = {this.newGame} />;
 
-          <PlayerStatus lives={this.state.player.lives} coins={this.state.player.coins} />
-
-          <p>Act: {acts[this.state.act].name}</p>
-          <p>Scene: {this.state.scene + 1}</p>
-          <p>{acts[this.state.act].scenes[this.state.scene].instructions}</p>
-
-          <div>
-            <MoveButton label="up" value="UP"
-            onClick = {this.handleMove.bind(this)} />
-            
-            <MoveButton label="down" value="DOWN"
-            onClick = {this.handleMove.bind(this)} />
-
-            <MoveButton label="right" value="RIGHT"
-            onClick = {this.handleMove.bind(this)} />
-
-            <MoveButton label="left" value="LEFT"
-            onClick = {this.handleMove.bind(this)} />
-
-            <MoveButton label="sword" value="SWORD"
-            onClick = {this.handleMove.bind(this)} />
-          </div>
-
-        </div>
-      </div>
-    );
+    if(this.state.gameStatus === 'active')
+      return (
+        <Game player = {this.state.player}
+              act = {this.state.act}
+              scene = {this.state.scene}
+              name = {acts[this.state.act].name}
+              instructions = {acts[this.state.act].instructions}
+              handleClick = {this.handleMove} />
+      )
+    
+    if(this.state.gameStatus === 'game-over') return <GameOver handleClick = {this.newGame} />;
   }
-}
 
-function MoveButton({ label, value, onClick }) {
-  return (
-    <button value={value} onClick={() => onClick(value)} >
-      {label}
-    </button>
-  );
-}
-
-function PlayerStatus({ lives, coins }) {
-  return (
-    <table>
-      <tbody>
-        <tr>
-          <th>Lives</th>
-          <th>Coins</th>
-        </tr>
-        <tr>
-          <td>{lives}</td>
-          <td>{coins}</td>
-        </tr>
-      </tbody>
-    </table>
-  )
 }
 
 export default App;
