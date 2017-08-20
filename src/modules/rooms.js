@@ -58,6 +58,7 @@ const office = {
 
 const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground];
 const items = ['cell phone', 'hall pass', 'math homework', 'banana peel', 'toilet paper statue', 'incriminating photograph', 'greasy pizza box'];
+const maxItm = 3;
 
 rooms.forEach(room => {
   room.doors = room.doors.map(door => {
@@ -65,11 +66,12 @@ rooms.forEach(room => {
   });
 });
 
-// TODO: add in max num items per room--if needed?
-items.forEach(item => {
+function placeRandom(item) {
   let randomIndex = Math.floor((Math.random() * rooms.length));
-  rooms[randomIndex].items.push(item);
-});
+  rooms[randomIndex].items.length === maxItm ? placeRandom(item) : rooms[randomIndex].items.push(item);
+}
+
+items.forEach(item => placeRandom(item));
 
 
 export default rooms;
