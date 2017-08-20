@@ -32,10 +32,9 @@ export function Game(props) {
                 </table>
             </div>
 
-            <h3>
-                Instructions:
-                {/* {props.acts[props.act].scenes[props.scene].instructions} */}
-            </h3>
+
+            <h2>{props.name}</h2>
+            <h3>{props.instructions}</h3>
 
             <div>
                 <MoveButton label="up" value="UP" onClick = {props.handleClick} />
