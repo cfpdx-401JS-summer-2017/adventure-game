@@ -1,36 +1,52 @@
 import React from 'react';
+import logo from './images/vector-dragons-lair-logo.jpg';
+import placeholderPicture from './images/vector-dirk-and-daphne.jpg';
 
-export function Game({ player, actNum, sceneNum }) {
+export function Game(props) {
+
     return (
         <div className="main">
 
-            <PlayerStatus lives={player.lives} coins={player.coins} />
-
-            <p>Act: {acts[actNum].name}</p>
-            <p>Scene: {sceneNum + 1}</p>
-            <p>{acts[actNum].scenes[sceneNum].instructions}</p>
-
             <div>
-                <MoveButton label="up" value="UP"
-                onClick = {this.handleMove.bind(this)} />
-                
-                <MoveButton label="down" value="DOWN"
-                onClick = {this.handleMove.bind(this)} />
-
-                <MoveButton label="right" value="RIGHT"
-                onClick = {this.handleMove.bind(this)} />
-
-                <MoveButton label="left" value="LEFT"
-                onClick = {this.handleMove.bind(this)} />
-
-                <MoveButton label="sword" value="SWORD"
-                onClick = {this.handleMove.bind(this)} />
+                <img src={logo} alt="Dragon's Lair" height="50px"/>
+                <br/>
+                <img src={placeholderPicture} alt="Dirk Saves Daphne" height="400px"/>
             </div>
 
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Act</th>
+                            <th>Scene</th>
+                            <th>Lives</th>
+                            <th>Coins</th>
+                        </tr>
+                        <tr>
+                            <td>{props.act}</td>
+                            <td>{props.scene}</td>
+                            <td>{props.player.lives}</td>
+                            <td>{props.player.coins}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>
+                Instructions:
+                {/* {props.acts[props.act].scenes[props.scene].instructions} */}
+            </h3>
+
+            <div>
+                <MoveButton label="up" value="UP" onClick = {props.handleClick} />
+                <MoveButton label="down" value="DOWN" onClick = {props.handleClick} />
+                <MoveButton label="right" value="RIGHT" onClick = {props.handleClick} />
+                <MoveButton label="left" value="LEFT" onClick = {props.handleClick} />
+                <MoveButton label="sword" value="SWORD" onClick = {props.handleClick} />
+            </div>
         </div>
     )
 }
-
 
 function MoveButton({ label, value, onClick }) {
     return (
@@ -38,21 +54,4 @@ function MoveButton({ label, value, onClick }) {
         {label}
       </button>
     );
-}
-
-function PlayerStatus({ lives, coins }) {
-    return (
-        <table>
-        <tbody>
-            <tr>
-            <th>Lives</th>
-            <th>Coins</th>
-            </tr>
-            <tr>
-            <td>{lives}</td>
-            <td>{coins}</td>
-            </tr>
-        </tbody>
-        </table>
-    )
 }

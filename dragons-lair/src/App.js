@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Splash } from './game/splash.js'
-import acts from './acts.js'
+import { Game } from './game/game.js'
+import { GameOver } from './game/game-over.js'
+import acts from './game/acts.js'
 
 class App extends Component {
 
@@ -12,7 +14,6 @@ class App extends Component {
       gameStatus: 'splash', //'active', 'game-over'
       act: 0,
       scene: 0,
-      moves: [],
       player: {
         lives: 3,
         coins: 0,
@@ -20,6 +21,7 @@ class App extends Component {
     }
 
     this.handleMove = this.handleMove.bind(this);
+    this.goToActive = this.goToActive.bind(this);
   }
 
   handleMove(move) {
@@ -45,16 +47,38 @@ class App extends Component {
       } else {
         //TODO: 
         alert('game over!');
+        this.setState({ gameStatus: "game-over"});
       }
     }
 
   }
 
+  goToActive() {
+    this.setState({ gameStatus: 'active' });
+  }
+
+  newGame() {
+    
+  }
 
   render() {
-    if(this.state.state === 'splash') return Splash;
-    if(this.state.state === 'splash') return Splash;
+    if(this.state.gameStatus === 'splash') return <Splash handleClick={this.goToActive} />;
+
+    if(this.state.gameStatus === 'active')
+      return (
+        <Game player={this.state.player}
+              act={this.state.act}
+              scene={this.state.act}
+              handleClick={this.handleMove} />
+      )
+    
+    if(this.state.gameStatus === 'game-over') return <GameOver handleClick={this.goToActive} />;
   }
+
 }
 
 export default App;
+
+function doTheThing() {
+
+}
