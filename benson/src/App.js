@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import rooms from './models/rooms.js';
+import rooms from './rooms';
 // import benson from './models/player.js';
-import enemies from './models/enemies.js';
+import enemies from './enemies';
 
 class App extends Component {
   constructor() {
@@ -34,15 +34,19 @@ class App extends Component {
   }
 
   render() {
+    const {player, room} = this.state;
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Benson's Burger</h2>
+          <h6>{player.name}</h6>
+          <h6>{player.inventory.join(', ')}</h6>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <Room room = {room}
+          onExit = {this.handleExit}
+          onPickup = {this.handlePickup}
+        />
       </div>
     );
   };
@@ -52,8 +56,22 @@ function Room({room, onExit, onPickup}) {
   return(
     <div>
       <h2>{room.name}</h2>
+      <p>{room.initText}</p>
+      <p>{enemies.enemyText}</p>
+      <p>Benson sees: {room.items.map((item, i) => (
+        <button key = {i} onClick = {() => onPickup(item)}>
+          {item}
+          </button>
+          ))}</p>
+          {room.doors.map((door, i) =>{
+            return(
+              <button key={i} onClick={() => onExit(door)}> 
+                Door to: {door.key}
+              </button>
+            );
+          })}
     </div>
-  )
+  );
 }
 
 export default App;

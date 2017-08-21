@@ -1,19 +1,22 @@
 const cuddlefish = {
     key: 'cuddlefish',
     name: 'Dreaded cuddlefish',
-    item: ['bean']
+    items: ['bean'],
+    enemyText: 'You see the dreaded Cuddlefish'
 };
 
 const jimbo = {
     key: 'jimbo',
-    name: 'Lientenant Jimbo',
-    items: ['luger']
+    name: 'Lieutenant Jimbo',
+    items: ['luger'],
+    enemyText: 'You see Lieutenant Jimbo'
 };
 
 const glaarg = {
     key: 'glaarg',
     name: 'Nazi King Glaärg',
-    items: ['burger', 'parachute']
+    items: ['burger', 'parachute'],
+    enemyText: 'Glllarrrarraggggg'
 };
 
 const enemies = [cuddlefish, jimbo, glaarg];

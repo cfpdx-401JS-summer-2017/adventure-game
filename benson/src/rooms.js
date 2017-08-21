@@ -57,4 +57,4 @@ rooms.forEach(room => {
     });
 });
 
-export default rooms;
+export default rooms
