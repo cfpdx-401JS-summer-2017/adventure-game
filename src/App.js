@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import rooms from './modules/rooms'
+import rooms from './modules/Room';
 import './App.css';
-import gameItems from './modules/items'
+import gameItems from './modules/items';
 
 class App extends Component {
   constructor(props) {
