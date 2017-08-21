@@ -31,7 +31,8 @@ const acts = {
     ropes: {
         name: 'Ropes',
         instructions: 'Which way to swing?',
-        // successVideo
+        video: 'http://media.w3.org/2010/05/bunny/movie.mp4',
+        // successVideo: '/videos/S....mp3'
         // pauseTime
         // deathVideo
         // buzzVideo
@@ -45,6 +46,7 @@ const acts = {
     bedroom: {
         name: 'Bedroom',
         instructions: 'Someone is coming!',
+        video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
         scenes: [{ correct: U }],
     },
     flyingBarding: {
