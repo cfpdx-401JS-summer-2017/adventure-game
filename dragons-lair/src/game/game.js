@@ -17,13 +17,12 @@ class Game extends Component {
                     <img src={logo} alt="Dragon's Lair" height="50px"/>
                     <br/>
 
-                    {/* <Player id="video-player" ref="dragonPlayer"
-                        autoPlay={true} onEnded={this.props.handleVideoEnd} >
+                    {/* <Player id="dragonPlayer"  autoPlay={true} >
                         <source src={this.props.videoSource} />
                         <ControlBar autoHide={true} />
                     </Player> */}
 
-                    <video controls={true} autoPlay id="dragonPlayer">
+                    <video controls={true} autoPlay id="dragonPlayer" height="600px">
                         <source src={this.props.videoSource} />
                     </video>
 

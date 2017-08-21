@@ -46,36 +46,54 @@ class App extends Component {
   }
 
   handleMove(move) {
-    console.log('user pressed', move);
-    let correct = acts[this.state.act].scenes[this.state.scene].correct;
+    
+    let userTime = document.getElementById("dragonPlayer").currentTime;
+    console.log('user pressed', move, 'time', userTime);
 
-    if (move === correct) { 
-      if(this.state.act === acts.length && this.state.scene === acts[this.state.act].scenes.length) {
-        this.setState({ gameStatus: 'win' });
-      } else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
-        // go to next scene
-        let scene = this.state.scene + 1;
-        this.setState({ scene })
+    let correctTimeStart = acts[this.state.act].scenes[this.state.scene].start;
+    let correctTimeStop = acts[this.state.act].scenes[this.state.scene].stop;
+    let correctMove = acts[this.state.act].scenes[this.state.scene].correct;
+    console.log('correct time', correctTimeStart, correctTimeStop, 'move', move);
+
+
+    // check if input is allowed at this time
+    if (userTime <= correctTimeStop && userTime >= correctTimeStart) {
+
+      if (move === correctMove) { 
+        // check if won game
+        if(this.state.act === acts.length && this.state.scene === acts[this.state.act].scenes.length) {
+          this.setState({ gameStatus: 'win' });
+        } else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
+          // go to next scene
+
+
+          let scene = this.state.scene + 1;
+          this.setState({ scene })
+        } else {
+          // go to next act
+          let act = this.state.act + 1;
+          this.setState({ act, scene: 0 })
+        }
+
       } else {
-        // go to next act
-        let act = this.state.act + 1;
-        this.setState({ act, scene: 0 })
+        if(this.state.player.lives > 0) {
+          // take away a life
+          // let soundOfDeath = new Audio('./sounds/death.mp3');
+          // soundOfDeath.play();
+          
+          let lives = this.state.player.lives - 1;
+          this.setState({ player: { lives, coins: 0 } })
+          //show death scene...
+        } else {
+          //show death scene...
+          // go to game over
+          this.setState({ gameStatus: "lose"});
+        }
       }
 
-    } else {
-      if(this.state.player.lives > 0) {
-        // take away a life
-        // let soundOfDeath = new Audio('./sounds/death.mp3');
-        // soundOfDeath.play();
-        
-        let lives = this.state.player.lives - 1;
-        this.setState({ player: { lives, coins: 0 } })
-        //show death scene...
-      } else {
-        //show death scene...
-        // go to game over
-        this.setState({ gameStatus: "lose"});
-      }
+    }
+    else {
+      console.log('can not submit move');
     }
 
   }
