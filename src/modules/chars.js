@@ -1,11 +1,16 @@
 const player = {
   key: 'player',
   name: 'Percy Prankster',
-  items: []
+  room: {},
+  inventory: []
 };
 
 const principal = {
   key: 'principal',
   name: 'Mr. Mean Principal',
-  room: ''
+  room: {}
 };
+
+let chars ={player, principal}
+
+export default chars;
