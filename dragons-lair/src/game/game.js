@@ -1,6 +1,7 @@
 import React from 'react';
+import { Player, ControlBar } from 'video-react';
+import '../../node_modules/video-react/dist/video-react.css';
 import logo from './images/dragons-lair-logo.png';
-import placeholderPicture from './images/vector-dirk-and-daphne.jpg';
 
 export function Game(props) {
 
@@ -10,9 +11,11 @@ export function Game(props) {
             <div>
                 <img src={logo} alt="Dragon's Lair" height="50px"/>
                 <br/>
-                <img src={placeholderPicture} alt="Dirk Saves Daphne" height="400px"/>
 
-                {/* <Player */}
+                <Player id="video-player" autoPlay={true} >
+                    <source src={props.video} />
+                    <ControlBar autoHide={true} />
+                </Player>
             </div>
 
             <div>

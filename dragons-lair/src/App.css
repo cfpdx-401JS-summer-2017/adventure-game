@@ -58,3 +58,11 @@ table {
 .sword-button:focus {
   outline: none;
 }
+
+.video-react .video-react-video{
+  padding-top: 0;
+}
+
+#video-player {
+  height: 600px;
+}
