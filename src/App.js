@@ -10,7 +10,12 @@ class App extends Component {
       rooms, 
       room: rooms[1],
       player
-    }
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+  console.log(event.target.value);
   }
 
   render() {
@@ -20,6 +25,7 @@ class App extends Component {
         <p>You are standing in a maze.</p>
         <Room room={room} />
         <Player player={player} />
+        <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" onChange={this.handleChange} /></p>
       </div>
     );
   }
@@ -40,7 +46,6 @@ function Player({ player }) {
   return (
     <div>
       <p>{playerItems}</p>
-      <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" /></p>
     </div>
   );
 }
