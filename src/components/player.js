@@ -1,7 +1,7 @@
 const player = {
     key: 'player',
-    name: 'Fred',
-    items: []
+    name: '',
+    items: ['nothing']
 }
 
 export default player;

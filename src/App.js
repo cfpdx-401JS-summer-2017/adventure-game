@@ -7,29 +7,31 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      player,
       rooms, 
-      room: rooms[1]
+      room: rooms[1],
+      player
     }
   }
 
   render() {
-    const { player, room } = this.state;
+    const { room, player } = this.state;
     return (
       <div id="app">
-        <Room room={room} />
+        <Room room={room} player={player} />
       </div>
     );
   }
 }
 
 function Room({ room, player }) {
-  const directions = "You see exits " + room.directions.slice(0, room.directions.length - 1).join(', ') + ", and " + room.directions.slice(-1) + ".";
+  const dirArr = room.directions;
+  const playerDir = 'You see exits ' + dirArr.slice(0, dirArr.length - 1).join(', ') + ', and ' + dirArr.slice(-1) + '.';
+  const playerItems = 'You are carrying ' + player.items + '.';
 
   return (
     <div>
       <p>You are standing in a maze.</p>
-      <p>{directions}</p>
+      <p>{playerDir} {playerItems}</p>
       <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" /></p>
     </div>
   );
