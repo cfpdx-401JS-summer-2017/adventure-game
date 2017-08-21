@@ -20,6 +20,7 @@ class App extends Component {
         lives: 3,
         coins: 0,
       },
+      video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
     }
 
     this.handleMove = this.handleMove.bind(this);
@@ -102,6 +103,7 @@ class App extends Component {
               name = {acts[this.state.act].name}
               instructions = {acts[this.state.act].instructions}
               handleClick = {this.handleMove}
+              video = {this.state.video}
               />
       )
     
