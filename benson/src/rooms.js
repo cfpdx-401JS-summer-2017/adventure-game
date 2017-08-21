@@ -3,7 +3,7 @@ const field = {
     name: 'A Pleasant Field',
     items: ['Magic Bean'],
     enemies: ['cuddlefish'],
-    doors: ['bean stalk'],
+    doors: ['foyer'],
     initText: 'Benson Wigglepuff, a noteworthy puggle of great importance, woke up to find that the Divine Cheeseburger he\'d been saving for breakfast was stolen from his rucksack while he dreamt. Using his dog-like sense of whiffing, he whiffed out the thief\'s tracks and they\'ve led him to this field. Benson sees a fertile patch of soil, and a magic bean. All in order. But lo\'! The dreaded Cuddlefish, in all its adorable-yet-eldritch horror levitates between him and the bean.'
 };
 
@@ -46,7 +46,7 @@ const throne = {
     name: 'Throne Room',
     items:['Burger', 'Parachute'],
     enemies: ['glaarg'],
-    doors: ['foyer', 'window']
+    doors: ['foyer']
 };
 
 const rooms = [field, foyer, hallway, garage, lounge, throne];

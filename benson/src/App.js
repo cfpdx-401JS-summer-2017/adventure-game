@@ -38,7 +38,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h2>Benson's Burger</h2>
           <h6>{player.name}</h6>
           <h6>{player.inventory.join(', ')}</h6>
@@ -66,12 +65,14 @@ function Room({room, onExit, onPickup}) {
           {room.doors.map((door, i) =>{
             return(
               <button key={i} onClick={() => onExit(door)}> 
-                Door to: {door.key}
+                Door to {door.name}
               </button>
             );
           })}
     </div>
   );
 }
+
+
 
 export default App;
