@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a snapshot 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="logo.svg"
+    />
+    <h6>
+      Percy Prankster
+    </h6>
+    <h6>
+      
+    </h6>
+  </div>
+  <div>
+    <h2>
+      West Hall
+    </h2>
+    <p>
+      You see: 
+    </p>
+    <button
+      onClick={[Function]}
+    >
+      Door to 
+      cafeteria
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Door to 
+      mathRoom
+    </button>
+    <button
+      onClick={[Function]}
+    >
+      Door to 
+      eastHall
+    </button>
+  </div>
+</div>
+`;

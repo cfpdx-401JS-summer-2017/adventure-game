@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/thomson42/adventure-game/issues"
   },
-  "homepage": "https://github.com/thomson42/adventure-game#readme"
+  "homepage": "https://github.com/thomson42/adventure-game#readme",
+  "devDependencies": {
+    "react-test-renderer": "^15.6.1"
+  }
 }
