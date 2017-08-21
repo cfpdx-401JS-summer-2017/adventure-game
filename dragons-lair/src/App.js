@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { Splash } from './game/splash.js';
 import acts from './game/acts.js';
-import { Game } from './game/game.js';
+import Game from './game/game.js';
 import { Lose, Win } from './game/game-over.js';
 
 console.log('ANSWERS:', acts); // keep this for testing
@@ -13,30 +13,24 @@ class App extends Component {
     super(props);
 
     this.state = {
-      gameStatus: 'splash', //'active', 'lose'
+      gameStatus: 'splash', //'active', 'lose', 'win'
       act: 0,
       scene: 0,
       player: {
         lives: 3,
         coins: 0,
-      },
-      video: 'https://media.w3.org/2010/05/sintel/trailer_hd.mp4',
+      }
     }
 
-    this.handleMove = this.handleMove.bind(this);
-    // this.handleKeyPress = this.handleKeyPress.bind(this);
+    this.handleMove = this.handleMove.bind(this);;
     this.newGame = this.newGame.bind(this);
+    this.handleVideoEnd = this.handleVideoEnd.bind(this);
   }
 
   componentDidMount() {
     document.addEventListener('keydown', this.handleKeyDown.bind(this));
-    // document.addEventListener('keydown', this.handleKeyPress.bind(this));
   }
-
-  // handleKeyPress(event) {
-  //   if (event.keyCode === 83) this.handleMove('SWORD');
-  // }
-
+  
   handleKeyDown(event) {
     let key = event.keyCode;
     if (key === 37) this.handleMove('LEFT');
@@ -45,6 +39,10 @@ class App extends Component {
     if (key === 40) this.handleMove('DOWN');
     if (key === 83) this.handleMove('SWORD');
     if (key === 88) this.handleMove('NONE');
+  }
+  
+  handleVideoEnd() {
+    alert('video had ended');
   }
 
   handleMove(move) {
@@ -103,7 +101,8 @@ class App extends Component {
               name = {acts[this.state.act].name}
               instructions = {acts[this.state.act].instructions}
               handleClick = {this.handleMove}
-              video = {this.state.video}
+              videoSource = {acts[this.state.act].video}
+              handleVideoEnd = {this.handleVideoEnd}
               />
       )
     
