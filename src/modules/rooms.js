@@ -81,7 +81,7 @@ export default rooms;
 // function propagateItems(room) {
 //   let roomItems = gameItems;
 //   let numbOfItems = Math.random()* (maxItm-minItm) + minItm;
-  
+
 //   for(let i = 0; i <= numbOfItems; i++) {
 //     let randomIndex = Math.random()* (roomItems.length-0);
 //     roomItems.push(roomItems[randomIndex]);
