@@ -1,32 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-
-Room.propTypes = {
-  room: PropTypes.object,
-
-};
+// import rooms from './rooms';
+// import { room } from '../App';
 
 
 
-// export function Movies({ movies }) {
-//   return (
-//     <div className="movieList">
-//       {movies.map(movie =>
-//         <div key={movie.imdbID}>
-//           <Movie movie={movie} />
-//         </div>
-//       )}
-//     </div>
-//   );
-// }
+export default function Room({ room, onExit, onPickup }) {
+  return (
+    <div>
+      <h2>{room.name}</h2>
+      <p>You see: {room.items.map((item, i) => (
+        <button key={i} onClick={() => onPickup(item)}>
+          {item}
+        </button>
+      ))}</p>
+      {room.doors.map((door, i) => {
+        return (
+          <button key={i} onClick={() => onExit(door)}>
+            Door to {door.key}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 
-// export function Movie({ movie }) {
-//   return (
-//       <div className="movieItem movieInfo">
-//         {movie.Title} - {movie.Year}
-//         <div className="movieInfo">
-//         <img src={movie.Poster} style={{width: 100}}/>
-//       </div>
-//       </div>
-//   );
-// }

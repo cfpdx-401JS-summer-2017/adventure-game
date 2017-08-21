@@ -1,4 +1,3 @@
-import gameItems from './items';
 
 const playground = {
   key: 'playground',
@@ -57,6 +56,7 @@ const office = {
 };
 
 const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground];
+
 const items = ['cell phone', 'hall pass', 'math homework', 'banana peel', 'toilet paper statue', 'incriminating photograph', 'greasy pizza box'];
 const maxItm = 3;
 
@@ -72,7 +72,6 @@ function placeRandom(item) {
 }
 
 items.forEach(item => placeRandom(item));
-
 
 export default rooms;
 
