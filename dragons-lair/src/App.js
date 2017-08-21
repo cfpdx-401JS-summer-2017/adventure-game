@@ -70,7 +70,9 @@ class App extends Component {
         
         let lives = this.state.player.lives - 1;
         this.setState({ player: { lives, coins: 0 } })
+        //show death scene...
       } else {
+        //show death scene...
         // go to game over
         this.setState({ gameStatus: "lose"});
       }
