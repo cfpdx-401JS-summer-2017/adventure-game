@@ -10,7 +10,7 @@ const cafeteria = {
   key: 'cafeteria',
   name: 'Food Trough',
   items: [],
-  doors: ['eastHall', 'westHall', 'gym']
+  doors: ['westHall', 'gym']
 };
 
 const gym = {
@@ -24,7 +24,7 @@ const eastHall = {
   key: 'eastHall',
   name: 'East Hall',
   items: [],
-  doors: ['gym', 'office', 'cafeteria', 'westHall','artRoom']
+  doors: ['gym', 'office', 'westHall','artRoom']
 };
 
 const westHall = {
@@ -56,8 +56,8 @@ const office = {
 };
 
 const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground];
-
 const items = ['cell phone', 'hall pass', 'math homework', 'banana peel', 'toilet paper statue', 'incriminating photograph', 'greasy pizza box'];
+
 const maxItm = 3;
 
 rooms.forEach(room => {

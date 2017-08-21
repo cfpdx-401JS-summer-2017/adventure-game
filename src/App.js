@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import Room from './modules/Room';
 import rooms from './modules/rooms';
 import chars from './modules/chars';
+import move from './modules/principal';
 import './App.css';
 
 class App extends Component {
@@ -25,13 +26,23 @@ class App extends Component {
   }
 
   handleExit(playerRoom) {
-    //for both player and principal
-    const {princRoom} = this.state;
-    let princDest = Math.floor((Math.random() * princRoom.doors.length));
-    console.log(princDest)
-    console.log('principalroom: ',princRoom.doors, princRoom.doors[princDest]);
-
-    this.setState({ playerRoom: playerRoom, princRoom:  princRoom.doors[princDest] });
+    const {princRoom, player} = this.state;
+    let princDest = move(princRoom, playerRoom)
+    console.log('playerNow: ',playerRoom, 'princNow: ', princDest);
+    if(playerRoom === princDest) {
+      console.log('same room');
+      console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom)
+      if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
+        console.log('hall pass = safe!');
+        this.setState({princRoom: rooms[1]})
+        this.handleExit(playerRoom);
+      } else {
+        console.log('time for a challenge!')
+        this.setState({princRoom: rooms[1]})
+        this.handleExit(playerRoom);
+      }
+    }
+    this.setState({ playerRoom: playerRoom, princRoom:  princDest });
   }
 
   handlePickup(item) {
@@ -39,15 +50,15 @@ class App extends Component {
     const index = playerRoom.items.indexOf(item);
     if (index > -1) playerRoom.items.splice(index, 1);
     player.inventory.push(item);
-
-    let princDestIndex = Math.floor((Math.random() * princRoom.doors.length));
-    let princDest = princRoom.doors[princDestIndex];
-
+    let princDest = move(princRoom, playerRoom)
     this.setState({
       playerRoom, player, princRoom:  princDest
     });
 
   }
+
+  // handleRoomRelations
+
 
 
 
