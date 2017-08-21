@@ -1,5 +1,22 @@
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}nav ol,nav ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}strong{font-weight:700}em{font-style:italic}
+
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+  background: #227;
+  color: #eee;
+  font-family: 'Inconsolata', monospace;
+}
+header {
+  border-top: 16px solid #227;
+  border-bottom: 16px solid #227;
+  padding: .5em 1em 1em;
+  background: #ddd;
+  color: #222;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  font-size: .7em;
+  font-weight: 700;
+}
+p#tagline {
+  font-size: .7em;
 }
