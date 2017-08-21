@@ -8,19 +8,30 @@ class App extends Component {
     super();
     this.state = {
       player,
-      rooms
+      rooms, 
+      room: rooms[1]
     }
   }
 
   render() {
+    const { player, room } = this.state;
     return (
       <div id="app">
-        <p>
-          You are standing in a maze.
-        </p>
+        <Room room={room} />
       </div>
     );
   }
+}
+
+function Room({ room, player }) {
+  const directions = "You see exits " + room.directions.slice(0, room.directions.length - 1).join(', ') + ", and " + room.directions.slice(-1) + ".";
+
+  return (
+    <div>
+      <p>You are standing in a maze.</p>
+      <p>{directions}</p>
+    </div>
+  );
 }
 
 export default App;

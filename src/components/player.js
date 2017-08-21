@@ -1,6 +1,6 @@
 const player = {
     key: 'player',
-    name: '',
+    name: 'Fred',
     items: []
 }
 
