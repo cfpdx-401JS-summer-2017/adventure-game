@@ -19,4 +19,6 @@ const glaarg = {
     enemyText: 'Glllarrrarraggggg'
 };
 
-export {cuddlefish, jimbo, glaarg};
+const enemies = {cuddlefish, jimbo, glaarg};
+
+export default enemies;

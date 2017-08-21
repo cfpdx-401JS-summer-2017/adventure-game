@@ -1,10 +1,10 @@
-import {cuddlefish, jimbo, glaarg} from './enemies';
+import enemies from './enemies';
 
 const field = {
     key: 'field',
     name: 'A Pleasant Field',
     items: ['Magic Bean'],
-    enemies: cuddlefish,
+    enemies: [enemies.cuddlefish],
     doors: ['foyer'],
     initText: 'Benson Wigglepuff, a noteworthy puggle of great importance, woke up to find that the Divine Cheeseburger he\'d been saving for breakfast was stolen from his rucksack while he dreamt. Using his dog-like sense of whiffing, he whiffed out the thief\'s tracks and they\'ve led him to this field. Benson sees a fertile patch of soil, and a magic bean. All in order. But lo\'! The dreaded Cuddlefish, in all its adorable-yet-eldritch horror levitates between him and the bean.'
 };
@@ -39,7 +39,7 @@ const lounge = {
     key: 'lounge',
     name: 'Employee Lounge',
     items: ['Luger'],
-    enemies: jimbo,
+    enemies: [enemies.jimbo],
     doors: ['hallway']
 };
 
@@ -47,7 +47,7 @@ const throne = {
     key: 'throne',
     name: 'Throne Room',
     items:['Burger', 'Parachute'],
-    enemies: glaarg,
+    enemies: [enemies.glaarg],
     doors: ['foyer']
 };
 

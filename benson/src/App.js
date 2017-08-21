@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import rooms from './rooms';
-// import benson from './models/player.js';
 import enemies from './enemies';
 
 class App extends Component {
@@ -19,6 +17,7 @@ class App extends Component {
     }
     this.handleExit = this.handleExit.bind(this);
     this.handlePickup = this.handlePickup.bind(this);
+    this.handleKill = this.handleKill.bind(this);
   }
 
   handleExit(room) {
@@ -33,6 +32,14 @@ class App extends Component {
     this.setState({room, player})
   }
 
+  handleKill(enemies) {
+    const {room, player} = this.state;
+    const index = room.enemies.indexOf(enemies);
+    if(index > -1) room.enemies.splice(index, 1);
+    room.enemies = null;
+    this.setState({room, player});
+  }
+
   render() {
     const {player, room} = this.state;
     return (
@@ -45,20 +52,28 @@ class App extends Component {
         <Room room = {room}
           onExit = {this.handleExit}
           onPickup = {this.handlePickup}
+          onKill = {this.handleKill}
         />
       </div>
     );
   };
 }
 
-function Room({room, onExit, onPickup}) {
+function Room({room, onExit, onPickup, onKill}) {
   return(
     <div>
       <h2>{room.name}</h2>
       <p>{room.initText}</p>
       {room.enemies &&
         <p>
-          {room.enemies.enemyText}
+          {room.enemies.map((enemy, i) => (
+            <div>
+          <p>{enemy.enemyText}</p>
+          <button key = {i} onClick = {() => onKill(enemy)}>
+            Kill {enemy.name}
+          </button>
+          </div>
+        ))}
         </p>
       }
       {room.enemies === null &&
