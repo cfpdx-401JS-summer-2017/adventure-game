@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import rooms from './modules/Room';
+import Room from './modules/Room';
+import rooms from './modules/rooms';
 import './App.css';
-import gameItems from './modules/items';
 
 class App extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class App extends Component {
     this.state = {
       rooms: rooms,
       room: rooms[0],
-      gameItems: gameItems,
       item: {
         key: '',
         name: ''
@@ -63,25 +62,6 @@ class App extends Component {
   }
 }
 
-function Room({ room, onExit, onPickup }) {
-  console.log(room)
-  return (
-    <div>
-      <h2>{room.name}</h2>
-      <p>You see: {room.items.map((item, i) => (
-        <button key={i} onClick={() => onPickup(item)}>
-          {item}
-        </button>
-      ))}</p>
-      {room.doors.map((door, i) => {
-        return (
-          <button key={i} onClick={() => onExit(door)}>
-            Door to {door.key}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+
 
 export default App;

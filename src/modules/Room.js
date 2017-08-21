@@ -1,20 +1,27 @@
-import roomData from './rooms';
+import React from 'react';
+// import rooms from './rooms';
+// import { room } from '../App';
 
-const rooms = roomData;
-const items = ['cell phone', 'hall pass', 'math homework', 'banana peel', 'toilet paper statue', 'incriminating photograph', 'greasy pizza box'];
-const maxItm = 3;
 
-rooms.forEach(room => {
-  room.doors = room.doors.map(door => {
-    return rooms.find(r => r.key === door);
-  });
-});
 
-function placeRandom(item) {
-  let randomIndex = Math.floor((Math.random() * rooms.length));
-  rooms[randomIndex].items.length === maxItm ? placeRandom(item) : rooms[randomIndex].items.push(item);
+export default function Room({ room, onExit, onPickup }) {
+  console.log('room is', room);
+  return (
+    <div>
+      <h2>{room.name}</h2>
+      <p>You see: {room.items.map((item, i) => (
+        <button key={i} onClick={() => onPickup(item)}>
+          {item}
+        </button>
+      ))}</p>
+      {room.doors.map((door, i) => {
+        return (
+          <button key={i} onClick={() => onExit(door)}>
+            Door to {door.key}
+          </button>
+        );
+      })}
+    </div>
+  );
 }
 
-items.forEach(item => placeRandom(item));
-
-export default rooms;
