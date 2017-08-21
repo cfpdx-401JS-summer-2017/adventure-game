@@ -30,6 +30,7 @@ function Room({ room, player }) {
     <div>
       <p>You are standing in a maze.</p>
       <p>{directions}</p>
+      <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" /></p>
     </div>
   );
 }

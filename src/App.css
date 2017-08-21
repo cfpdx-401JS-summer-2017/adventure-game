@@ -4,3 +4,13 @@
 #app p {
   margin: 1em;
 }
+input.gameInput {
+  border: none;
+  background: #227;
+  color: #eee;
+  font-family: 'Inconsolata', monospace;
+  font-size: 1em;
+}
+input.gameInput:focus {
+  outline: none;
+}
