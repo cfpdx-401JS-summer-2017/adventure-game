@@ -5,7 +5,6 @@ import React from 'react';
 
 
 export default function Room({ room, onExit, onPickup }) {
-  console.log('room is', room);
   return (
     <div>
       <h2>{room.name}</h2>
