@@ -56,19 +56,27 @@ function Room({room, onExit, onPickup}) {
     <div>
       <h2>{room.name}</h2>
       <p>{room.initText}</p>
-      <p>{enemies.enemyText}</p>
-      <p>Benson sees: {room.items.map((item, i) => (
-        <button key = {i} onClick = {() => onPickup(item)}>
-          {item}
+      {room.enemies &&
+        <p>
+          {room.enemies.enemyText}
+        </p>
+      }
+      {room.enemies === null &&
+        <p>
+          {room.items.map((item, i) => (
+          <button key = {i} onClick = {() => onPickup(item)}>
+            Pick up {item}
           </button>
-          ))}</p>
-          {room.doors.map((door, i) =>{
-            return(
-              <button key={i} onClick={() => onExit(door)}> 
-                Door to {door.name}
-              </button>
-            );
-          })}
+        ))}
+        </p>
+      }
+      {room.doors.map((door, i) =>{
+        return(
+          <button key={i} onClick={() => onExit(door)}> 
+            Door to {door.name}
+          </button>
+        );
+      })}
     </div>
   );
 }
