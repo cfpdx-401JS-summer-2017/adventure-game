@@ -93,6 +93,24 @@ class App extends Component {
         });
       }
     }
+
+    else if (keyVal[0] === 'u') {
+      if (player.items.length > 0) {
+        if (rooms[roomNum].characters.length > 0) {
+          // handle use here
+        } else {
+          this.setState({
+            gameMsg: '',
+            errorMsg: 'You bang ' + player.items[0] + ' against a wall, but nothing happens.'
+          });  
+        }
+      } else {
+        this.setState({
+          gameMsg: '',
+          errorMsg: 'You have to pick something up before using it.'
+        });
+      }
+    }
     
   }
 
