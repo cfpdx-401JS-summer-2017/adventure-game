@@ -8,27 +8,9 @@ class Game extends Component {
 
     componentDidMount() {
         document.getElementById('dragonPlayer').addEventListener('pause', this.props.handleVideoPause);
+        document.getElementById('dragonPlayer').addEventListener('ended', this.props.handleVideoEnd);
         // document.getElementById('dragonPlayer').addEventListener('timeupdate', this.handleVideoTimeReached);
     }
-
-    // handleVideoTimeReached(){
-    //     let now = this.currentTime;
-
-    //     this.props.determineIfNeedToEvaluate(now);
-
-        // let stopTimes = [12, 24]; // get from current act/scene
-        // let correctMoves = [ "RIGHT", "SWORD"]; // get from current act/scene
-        // let userInput = "RIGHT"; // get from handleMove...
-        
-        // console.log("running event listener");
-        
-        // if(now >= stopTime) {
-        //     this.pause();
-        //     if (userInput === correctMoves[0]) {
-        //         this.play();
-        //     } else {}
-        // }
-    // }
 
     render() {
         return (
@@ -43,7 +25,7 @@ class Game extends Component {
                         <ControlBar autoHide={true} />
                     </Player> */}
 
-                    <video controls={true} autoPlay id="dragonPlayer" height="600px">
+                    <video controls={false} autoPlay id="dragonPlayer" height="600px">
                         <source src={this.props.videoSource} />
                     </video>
 
