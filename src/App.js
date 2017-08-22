@@ -31,12 +31,15 @@ class App extends Component {
 
   handleKeyPress(event) {
     const keyVal = getKeyPress(event);
+    
     if (keyVal[0] === 'invalid') {
       this.setState({
         gameMsg: '',
         errorMsg: 'invalid command.'
       })
-    } else if (keyVal[0] === 'up' || keyVal[0] === 'down' || keyVal[0] === 'left' || keyVal[0] === 'right') {
+    } 
+    
+    else if (keyVal[0] === 'up' || keyVal[0] === 'down' || keyVal[0] === 'left' || keyVal[0] === 'right') {
       if (rooms[roomNum].directions.includes(keyVal[0])) {
         roomNum += keyVal[1];
         this.setState({
@@ -50,14 +53,16 @@ class App extends Component {
           errorMsg: 'You try to go ' + keyVal[0] + '. Bump! You hit a wall.'
         });
       }
-    } else if (keyVal[0] === 'p') {
+    } 
+    
+    else if (keyVal[0] === 'p') {
       if (rooms[roomNum].items.length > 0 && rooms[roomNum].items[0].hidden === false) {
         const { player } = this.state;
         player.items.push(rooms[roomNum].items[0].item);
         rooms[roomNum].items = [];
         this.setState({
           player: player,
-          gameMsg: 'ok',
+          gameMsg: 'You picked up ' + player.items[0] + '.',
           errorMsg: ''
         })
       } else {
