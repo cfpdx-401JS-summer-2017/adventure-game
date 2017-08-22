@@ -6,7 +6,7 @@ export function Splash(props) {
         <div className="main">
             <img src={logo} alt="Dragon's Lair" />
             <h2>Save Princess Daphne!</h2>
-            <button className="button" onClick={props.handleClick} >BEGIN</button>
+            <button className="button" onClick={props.handleClick} >PLAY</button>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from './images/dragons-lair-logo.png';
-import deadDirk from './gifs/amiga-dragons-lair-esc-fire-ropes-disintegrate.gif';
 import dirkDaphne from './images/icon-dirk-and-daphne-512x512.png'
 
 export function Lose(props) {
@@ -9,10 +8,12 @@ export function Lose(props) {
             <div>
                 <img src={logo} alt="Dragon's Lair" height="50px"/>
                 <br/>
-                <img src={deadDirk} alt="Dirk is Dead" />
+                <video controls={false} autoPlay>
+                    <source src="/videos/GameOver.mp4" />
+                </video>
             </div>
             <h2>Game Over!</h2>
-            <button className="button" onClick={props.handleClick} >PLAY AGAIN</button>
+            <button className="button" onClick={props.handleClick} >TRY AGAIN</button>
         </div>
     )
 }
