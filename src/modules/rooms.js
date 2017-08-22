@@ -10,7 +10,7 @@ const cafeteria = {
   key: 'cafeteria',
   name: 'Food Trough',
   items: [],
-  doors: ['eastHall', 'westHall', 'gym']
+  doors: ['westHall', 'gym']
 };
 
 const gym = {
@@ -24,7 +24,7 @@ const eastHall = {
   key: 'eastHall',
   name: 'East Hall',
   items: [],
-  doors: ['gym', 'office', 'cafeteria', 'westHall','artRoom']
+  doors: ['gym', 'office', 'westHall','artRoom']
 };
 
 const westHall = {
@@ -56,8 +56,8 @@ const office = {
 };
 
 const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground];
-
 const items = ['cell phone', 'hall pass', 'math homework', 'banana peel', 'toilet paper statue', 'incriminating photograph', 'greasy pizza box'];
+
 const maxItm = 3;
 
 rooms.forEach(room => {
@@ -74,86 +74,3 @@ function placeRandom(item) {
 items.forEach(item => placeRandom(item));
 
 export default rooms;
-
-// let maxItm = 3;
-// let minItm = 1;
-
-// function propagateItems(room) {
-//   let roomItems = gameItems;
-//   let numbOfItems = Math.random()* (maxItm-minItm) + minItm;
-
-//   for(let i = 0; i <= numbOfItems; i++) {
-//     let randomIndex = Math.random()* (roomItems.length-0);
-//     roomItems.push(roomItems[randomIndex]);
-//     roomItems.splice(randomIndex,1);
-//   }
-//   console.log(roomItems);
-//   return roomItems;
-// }
-
-// rooms.forEach(room => {
-//   room.items = propagateItems(room);
-//   room.doors = room.doors.map(door => {
-//     return rooms.find(r => r.key === door);
-//   });
-//   return room;
-// });
-
-// const rooms = [
-// {
-//     key: 'playground',
-//     name: 'Playground',
-//     items: [],
-//     doors: ['gym']
-// },
-
-// {
-//   key: 'cafeteria',
-//   name: 'Food Trough',
-//   items: [],
-//   doors: ['eastHall', 'westHall', 'gym']
-// },
-// {
-//   key: 'gym',
-//   name: 'Gym',
-//   items: [],
-//   doors: ['eastHall', 'cafeteria', 'playground']
-// },
-
-// {
-//   key: 'eastHall',
-//   name: 'East Hall',
-//   items: [],
-//   doors: ['gym', 'office', 'cafeteria', 'westHall','artRoom']
-// },
-
-// {
-//   key: 'westHall',
-//   name: 'West Hall',
-//   items: [],
-//   doors: ['cafeteria', 'mathRoom', 'eastHall']
-// },
-
-//  {
-//   key: 'mathRoom',
-//   name: 'Algebra for Everyone',
-//   items: [],
-//   doors: ['westHall', 'artRoom']
-// },
-
-//  {
-//   key: 'artRoom',
-//   name: 'Painting for People',
-//   items: [],
-//   doors: ['mathRoom', 'eastHall']
-// },
-
-//  {
-//   key: 'office',
-//   name: 'Principal\'s Office',
-//   items: [],
-//   doors: ['eastHall']
-
-// }
-// ];
-
