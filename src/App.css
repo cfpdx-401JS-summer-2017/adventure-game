@@ -1,6 +1,3 @@
-#app {
-  margin-top: 6em;
-}
 #app p {
   margin: 1em;
 }
@@ -14,6 +11,9 @@ input.gameInput {
 }
 input.gameInput:focus {
   outline: none;
+}
+.exit {
+  color: #772;
 }
 .gameMsg {
   color: #6f6;

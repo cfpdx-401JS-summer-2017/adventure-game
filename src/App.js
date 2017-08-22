@@ -47,7 +47,7 @@ class App extends Component {
       } else {
         this.setState({
           gameMsg: '',
-          errorMsg: 'Bump! Can\'t go that way.'
+          errorMsg: 'You try to go ' + keyVal[0] + '. Bump! You hit a wall.'
         });
       }
     }

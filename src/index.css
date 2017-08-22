@@ -6,14 +6,10 @@ body {
   font-family: 'Inconsolata', monospace;
 }
 header {
-  border-top: 16px solid #227;
-  border-bottom: 16px solid #227;
+  margin: 2em 0;
   padding: .5em 1em 1em;
   background: #ccc;
   color: #222;
-  position: fixed;
-  width: 100%;
-  top: 0;
   font-size: .7em;
   font-weight: 700;
 }
