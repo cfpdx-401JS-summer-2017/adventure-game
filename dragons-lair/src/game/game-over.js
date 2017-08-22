@@ -1,6 +1,6 @@
 import React from 'react';
-import logo from './images/dragons-lair-logo.png';
-import dirkDaphne from './images/icon-dirk-and-daphne-512x512.png'
+const logo = '/images/dragons-lair-logo.png';
+const dirkDaphne = '/images/icon-dirk-and-daphne-512x512.png'
 
 export function Lose(props) {
     return (

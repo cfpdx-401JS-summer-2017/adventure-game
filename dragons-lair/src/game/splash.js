@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from './images/icon-dragons-lair-logo-512x512.png';
+const logo = '/images/icon-dragons-lair-logo-512x512.png';
 
 export function Splash(props) {
     return (

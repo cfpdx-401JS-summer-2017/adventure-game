@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import '../../node_modules/video-react/dist/video-react.css';
-import logo from './images/dragons-lair-logo.png';
+const logo = '/images/dragons-lair-logo.png';
 
 class Game extends Component {
 
     componentDidMount() {
         document.getElementById('dragonPlayer').addEventListener('pause', this.props.handleVideoPause);
         document.getElementById('dragonPlayer').addEventListener('ended', this.props.handleVideoEnd);
+        document.getElementById('dragonPlayer').addEventListener('timeupdate', this.props.handleVideoTimeUpdate);
     }
 
     render() {
@@ -24,14 +25,12 @@ class Game extends Component {
                     <table>
                         <tbody>
                             <tr>
-                                <th>Act</th>
                                 <th>Scene</th>
                                 <th>Lives</th>
                             </tr>
                             <tr>
-                                <td>{this.props.act}</td>
                                 <td>{this.props.scene}</td>
-                                <td>{this.props.player.lives}</td>
+                                <td>{this.props.lives}</td>
                             </tr>
                         </tbody>
                     </table>
