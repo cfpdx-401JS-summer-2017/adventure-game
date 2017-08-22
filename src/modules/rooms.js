@@ -54,8 +54,20 @@ const office = {
   items: [],
   doors: ['eastHall']
 };
+const scienceLab = {
+  key: 'scienceLab',
+  name: 'Science Lab',
+  items: [],
+  doors: ['westHall,garden']
+};
+const garden = {
+  key: 'garden',
+  name: 'Garden',
+  items: [],
+  doors:[scienceLab]
+}
 
-const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground];
+const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground, garden, scienceLab];
 const items = ['math homework', 'cell phone', 'hall pass', 'banana peel', 'toilet paper statue', 'embarrassing photograph', 'greasy pizza box', 'catapult','report card', 'empty spray paint can'];
 
 const maxItm = 3;

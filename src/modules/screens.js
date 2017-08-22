@@ -11,6 +11,7 @@ export function Start({onStart}) {
 				Search the rooms of your school for incriminating evidence. Pick up all of the items to win the game. If the principal catches you, use your wits to get free, or else you lose!
       </p>
       <button onClick={() => onStart()}>Play the Game!</button>
+      <br/>
       <img style={{ maxWidth: '700' }} alt="Map" src="./worldMap.png" />
     </div>
   );
