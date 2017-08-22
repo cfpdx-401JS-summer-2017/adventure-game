@@ -15,4 +15,9 @@ input.gameInput {
 input.gameInput:focus {
   outline: none;
 }
-#message {color: red};
+.gameMsg {
+  color: #6f6;
+}
+.errorMsg {
+  color: #f66;
+}

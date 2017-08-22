@@ -17,7 +17,8 @@ class App extends Component {
         name: '',
         items: []
       },
-      message: '',
+      gameMsg: '',
+      errorMsg: '',
       value: ''
     }
     this.handleExit = this.handleExit.bind(this);
@@ -32,18 +33,21 @@ class App extends Component {
     const keyVal = getKeyPress(event);
     if (keyVal[0] === 'invalid') {
       this.setState({
-        message: 'invalid command'
+        gameMsg: '',
+        errorMsg: 'invalid command.'
       })
     } else if (keyVal[0] === 'up' || keyVal[0] === 'down' || keyVal[0] === 'left' || keyVal[0] === 'right') {
       if (rooms[roomNum].directions.includes(keyVal[0])) {
         roomNum += keyVal[1];
         this.setState({
           room: rooms[roomNum],
-          message: 'You went ' + keyVal[0]
+          gameMsg: 'You went ' + keyVal[0] + '.',
+          errorMsg: ''
         });
       } else {
         this.setState({
-          message: 'Bump! Can\'t go that way.'
+          gameMsg: '',
+          errorMsg: 'Bump! Can\'t go that way.'
         });
       }
     }
@@ -57,7 +61,10 @@ class App extends Component {
         <Room room={room} />
         <Player player={player} />
         <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" onKeyDown={this.handleKeyPress} placeholder="&#8593;=up, &#8595;=down, &#8594;=right, &#8592;=left, p=pickup, d=drop, s=speak, u=use" value={this.state.value}></input></p>
-        <p id="message">{this.state.message}</p>
+        <p>
+          <span className="gameMsg">{this.state.gameMsg}</span>
+          <span className="errorMsg">{this.state.errorMsg}</span>
+        </p>
       </div>
     );
   }
