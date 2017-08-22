@@ -55,7 +55,6 @@ class App extends Component {
     if(player.inventory
       .includes(
         'cell phone',
-        'hall pass',
         'banana peel',
         'toilet paper statue',
         'embarrassing photograph',
