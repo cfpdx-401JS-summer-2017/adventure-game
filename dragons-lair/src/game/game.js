@@ -25,7 +25,7 @@ class Game extends Component {
                         <ControlBar autoHide={true} />
                     </Player> */}
 
-                    <video controls={true} autoPlay id="dragonPlayer" height="600px">
+                    <video controls={false} autoPlay id="dragonPlayer" height="600px">
                         <source src={this.props.videoSource} />
                     </video>
 

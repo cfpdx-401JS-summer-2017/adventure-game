@@ -20,6 +20,7 @@ class App extends Component {
         lives: 3,
         move: null,
         moveTime: null,
+        playingDeathVideo: false,
       },
       
     }
@@ -28,9 +29,9 @@ class App extends Component {
     this.playVideo = this.playVideo.bind(this);
     this.evaluateMove = this.evaluateMove.bind(this);
 
-    this.handleMove = this.handleMove.bind(this);
     this.handleVideoPause = this.handleVideoPause.bind(this);
     this.handleVideoEnd = this.handleVideoEnd.bind(this);
+    this.handleMove = this.handleMove.bind(this);
   }
 
   componentDidMount() {
@@ -49,19 +50,22 @@ class App extends Component {
   
   handleVideoPause() {
     console.log('video paused');
-    console.log('>>>>> ACT', this.state.act, 'SCENE', this.state.scene, '<<<<<')
-    this.evaluateMove();
+    // console.log('>>>>> ACT', this.state.act, 'SCENE', this.state.scene, '<<<<<')
+    console.log('death video playing?', this.state.playingDeathVideo);
+    if (!this.state.playingDeathVideo) this.evaluateMove();
   }
 
   handleVideoEnd() {
     console.log('video ended');
     let nextVideo = acts[this.state.act].scenes[this.state.scene].challengeVideo;
     this.playVideo(nextVideo);
+
+    if (this.state.playingDeathVideo) this.setState({ playingDeathVideo: false });
   }
   
   handleMove(move) {
     let moveTime = document.getElementById("dragonPlayer").currentTime;
-    let lives = this.state.lives;
+    let lives = this.state.player.lives;
     this.setState({ player: { move, moveTime, lives } });
     
     console.log('user move', move, 'time', moveTime);
@@ -73,49 +77,72 @@ class App extends Component {
     let correctTimeStop = acts[this.state.act].scenes[this.state.scene].stop;
     let nextVideo = null;
     
-    if (this.state.player.move === correctMove) { 
-      // check if game is won
-      if (this.state.act === acts.length && this.state.scene === acts[this.state.act].scenes.length) {
+    // check if move was correct, and was made at the correct time
+    if (this.state.player.move === correctMove
+        && this.state.player.moveTime >= correctTimeStart
+        && this.state.player.moveTime <= correctTimeStop) {
+
+          console.log('move was correct');
+          
+
+      // check if game is won (on last act & last scene)
+      if (this.state.act === acts.length
+        && this.state.scene === acts[this.state.act].scenes.length) {
+        // show the win screen
         this.setState({ gameStatus: 'win' });
-      } else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
+      }
+
+      // check if there are more scenes in the current act
+      else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
+        console.log('going to the next scene....');
+        
         // go to next scene
         let scene = this.state.scene + 1;
         this.setState({ scene })
-
-        // play next videos
+        
+        // play the success video
         nextVideo = acts[this.state.act].scenes[this.state.scene].prevSuccessVideo;
         this.playVideo(nextVideo);
-        // nextVideo = acts[this.state.act].scenes[this.state.scene].challengeVideo;
-        // this.playVideo(nextVideo);
+        
+      }
 
+      // no more scenes, go to the next act
+      else {
+        console.log('going to the next act...');
 
-      } else {
-        // go to next act
         let act = this.state.act + 1;
         this.setState({ act, scene: 0 })
 
-        // play next videos
-        // nextVideo = acts[this.state.act].scenes[this.state.scene].prevSuccessVideo;
-        // this.playVideo(nextVideo);
-
-        nextVideo = acts[this.state.act].scenes[this.state.scene].challengeVideo;
+        // play the success video
+        nextVideo = acts[this.state.act].scenes[this.state.scene].prevSuccessVideo;
         this.playVideo(nextVideo);
+
       }
-    } else {
+    }
+    
+    // user did not make the correct move at the right time
+    else {
+      console.log('you died');
+      this.setState({ playingDeathVideo: true });
+
       // check if user has lives
       if (this.state.player.lives > 0) {
         // take away a life
+        console.log('taking away one life');
         let lives = this.state.player.lives - 1;
         this.setState({ player: { lives } })
+
+        // play the death video
         nextVideo = acts[this.state.act].scenes[this.state.scene].deathVideo;
         this.playVideo(nextVideo);
         
-        // play next challenge....
-
-      } else {
+      }
+      
+      else {
         //show death scene
         nextVideo = acts[this.state.act].scenes[this.state.scene].deathVideo;
         this.playVideo(nextVideo);
+
         // go to game over
         this.setState({ gameStatus: "lose"});
       }

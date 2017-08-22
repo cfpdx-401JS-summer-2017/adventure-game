@@ -34,40 +34,57 @@ const acts = {
                 stop: 11,
                 correct: S,
                 challengeVideo: '/videos/S01Home.mp4#t=0,11',
-                // successVideo: '/videos/S01Home.mp4#t=11,21',
                 deathVideo: '/videos/S02D1.mp4'
             },
             {
                 start: 22,
                 stop: 24,
                 correct: R,
-                challengeVideo: '/videos/S01Home.mp4#t=11,24',
-                successVideo: '/videos/S01Home.mp4#t=24,26',
-                deathVideo: '/videos/S02D3.mp4' },
+                prevSuccessVideo: '/videos/S01Home.mp4#t=11,22',
+                challengeVideo: '/videos/S01Home.mp4#t=22,24',
+                deathVideo: '/videos/S02D3.mp4'
+            },
         ]
     },
     tentacles: {
-        video: '/videos/S03.mp4',
         revive: '/videos/S03R.mp4',
         scenes: [
             {
-                start: 1,
+                start: 0,
                 stop: 3, 
                 correct: S,
-                challengeVideo: '/videos/S03.mp4#1,3',
-                // successVideo: '/videos/S03.mp4#3,4',
-                deathVideo: 'S03D1.mp4'
-            },
-            {
+                prevSuccessVideo: '/videos/S01Home.mp4#t=24,26',
+                challengeVideo: '/videos/S03.mp4#0,3',
+                deathVideo: '/videos/S03D1.mp4'
+            },{
                 start: 5,
                 stop: 6,
                 correct: U,
+                prevSuccessVideo: '/videos/S03.mp4#3,4',
                 challengeVideo: '/videos/S03.mp4#5,6',
-                // successVideo: '/videos/S03.mp4#5,6',
-                deathVideo: 'S03D2.mp4' },
-            // { challengeVideo: '/videos/S03.mp4#7,8', start: 7, stop: 8, correct: R, deathVideo: 'S03D4.mp4' },
-            // { challengeVideo: '/videos/S03.mp4#9,10', start: 9, stop: 10, correct: D, deathVideo: 'S03D3.mp4' },
-            // { challengeVideo: '/videos/S03.mp4#11,12', start: 11, stop: 12, correct: L, deathVideo: 'S03D3.mp4' },
+                deathVideo: '/videos/S03D2.mp4'
+            },{
+                start: 7,
+                stop: 8,
+                correct: R,
+                prevSuccessVideo: '/videos/S03.mp4#6,7',
+                challengeVideo: '/videos/S03.mp4#7,8',
+                deathVideo: 'S03D4.mp4'
+            },{
+                start: 9,
+                stop: 10,
+                correct: D,
+                prevSuccessVideo: '/videos/S03.mp4#8,9',
+                challengeVideo: '/videos/S03.mp4#9,10',
+                deathVideo: 'S03D3.mp4'
+            },{
+                start: 11,
+                stop: 12,
+                correct: L,
+                prevSuccessVideo: '/videos/S03.mp4#10,11',
+                challengeVideo: '/videos/S03.mp4#11,12',
+                deathVideo: 'S03D3.mp4'
+            },
         ]
     }
 
