@@ -4,7 +4,7 @@ const rooms = [
         key: 0,
         directions: ['right'],
         items: [{
-            item: 'fish',
+            item: 'a fish',
             hidden: false
         }],
         characters: []

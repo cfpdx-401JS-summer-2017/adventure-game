@@ -52,7 +52,11 @@ class App extends Component {
       }
     } else if (keyVal[0] === 'p') {
       if (rooms[roomNum].items.length > 0 && rooms[roomNum].items[0].hidden === false) {
+        const { player } = this.state;
+        player.items.push(rooms[roomNum].items[0].item);
+        rooms[roomNum].items = [];
         this.setState({
+          player: player,
           gameMsg: 'ok',
           errorMsg: ''
         })
@@ -69,7 +73,7 @@ class App extends Component {
     const { room, player } = this.state;
     return (
       <div id="app">
-        <p>You are standing in a maze.</p>
+        <p>YOU ARE STANDING IN A MAZE.</p>
         <Room room={room} />
         <Player player={player} />
         <p id="input">

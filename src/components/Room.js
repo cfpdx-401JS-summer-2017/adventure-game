@@ -10,7 +10,7 @@ export function Room({ room }) {
   if (room.items.length > 0 && room.items[0].hidden === false) itemMsg = ' You see a ' + room.items[0].item + ' on the ground.';
   
   let charMsg = '';
-  if (room.characters.length > 0) charMsg = ' You see a ' + room.characters[0] + '.';
+  if (room.characters.length > 0) charMsg = ' You see ' + room.characters[0] + '.';
   
   return (
     <div>

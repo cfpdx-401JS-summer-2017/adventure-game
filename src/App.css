@@ -16,8 +16,9 @@ textarea.gameInput {
 textarea.gameInput:focus {
   outline: none;
 }
-.roomMsg  { color: #ff3; }
-.itemMsg  { color: #f93; }
-.charMsg  { color: #f39; }
-.gameMsg  { color: #6f6; }
-.errorMsg { color: #f55; }
+.roomMsg   { color: #ff3; }
+.itemMsg   { color: #f93; }
+.charMsg   { color: #f39; }
+.gameMsg   { color: #6f6; }
+.errorMsg  { color: #f55; }
+.playerMsg { color: #bdf; }

@@ -8,7 +8,9 @@ export function Player({ player }) {
     } 
     return (
       <div>
-        <p>{playerItems}</p>
+        <p>
+          <span className="playerMsg">{playerItems}</span>
+        </p>
       </div>
     );
   }
