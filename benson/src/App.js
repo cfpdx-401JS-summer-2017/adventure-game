@@ -19,6 +19,7 @@ class App extends Component {
     this.handlePickup = this.handlePickup.bind(this);
     this.handleKill = this.handleKill.bind(this);
     this.hasBean = this.hasBean.bind(this);
+    this.checkWeakness = this.checkWeakness.bind(this);
   }
 
   handleExit(room) {
@@ -47,6 +48,15 @@ class App extends Component {
 
   }
 
+  checkWeakness(enemy, weakness) {
+    const { room, player } = this.state;
+    if(player.inventory.some(item => item === weakness)){
+      this.handleKill(enemy);
+    } else {
+      return <p> You are not equipped for this fight </p>;
+    }
+  }
+
   render() {
     const { player, room } = this.state;
     return (
@@ -61,13 +71,14 @@ class App extends Component {
           onPickup={this.handlePickup}
           onKill={this.handleKill}
           hasBean = {this.hasBean}
+          checkWeakness = {this.checkWeakness}
         />
       </div>
     );
   };
 }
 
-function Room({ room, onExit, onPickup, onKill, hasBean }) {
+function Room({ room, onExit, onPickup, onKill, hasBean, checkWeakness }) {
   return (
     <div>
       <h2>{room.name}</h2>
@@ -77,7 +88,7 @@ function Room({ room, onExit, onPickup, onKill, hasBean }) {
           {room.enemies.map((enemy, i) => (
             <div>
               <p>{enemy.enemyText}</p>
-              <button key={i} onClick={() => onKill(enemy)}>
+              <button key={i} onClick={() => checkWeakness(enemy, enemy.weakness)}>
                 Kill {enemy.name}
               </button>
             </div>

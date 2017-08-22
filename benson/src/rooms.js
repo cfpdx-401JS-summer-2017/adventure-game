@@ -46,7 +46,7 @@ const lounge = {
 const throne = {
     key: 'throne',
     name: 'Throne Room',
-    items:['Burger', 'Parachute'],
+    items:['Burger'],
     enemies: [enemies.glaarg],
     doors: ['foyer']
 };
