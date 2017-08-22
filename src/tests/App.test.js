@@ -13,3 +13,6 @@ it('renders a snapshot', () => {
   const tree = renderer.create(<App/>).toJSON();
   expect(tree).toMatchSnapshot();
 });
+// it('Player and Principal start in right spots', () => {
+//   const wrapper = shallow(<)
+// })
