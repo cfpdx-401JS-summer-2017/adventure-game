@@ -1,8 +1,4 @@
 import React from 'react';
-// import rooms from './rooms';
-// import { room } from '../App';
-
-
 
 export default function Room({ room, onExit, onPickup }) {
   return (

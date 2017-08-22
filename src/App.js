@@ -4,7 +4,7 @@ import Room from './modules/Room';
 import rooms from './modules/rooms';
 import chars from './modules/chars';
 import move from './modules/principal';
-// import challenges from './modules/challenges'
+import challenges from './modules/challenges'
 import Challenge from './modules/Challenge'
 import './App.css';
 
@@ -25,23 +25,25 @@ class App extends Component {
       },
       player: chars.player,
       principal: chars.principal,
+      playerAnswer: 'A',
       challenge: {
-        question: '',
-        answerA: '',
-        answerB: '',
-        answerC: '',
-        answerD: '',
-        correctAnswer: '',
-        state: ''
+        question: 'What is 2 + 2 num2?',
+        answerA: '4',
+        answerB: '5',
+        answerC: '6',
+        answerD: '8',
+        corectAnswer: 'A',
+        state: 'incorrect'
       },
-      playerAnswer: ''
+      playerWin: false,
+      visible: false
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
   }
 
   handleRoomRelations(playerDest) {
-    const {player, princRoom, rooms, playerRoom} = this.state;
+    const {player, princRoom, rooms, playerRoom, playerWin, challenge} = this.state;
     if(playerRoom === princRoom) {
       console.log('same room');
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
@@ -49,16 +51,19 @@ class App extends Component {
         this.setState({princRoom: rooms[1], playerRoom: playerDest})
       } else {
         console.log('time for a challenge!')
-        // let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
-        // console.log('pw: ', playerWin);
-        // this.setState({message: challenges[0].question})
+        let index = Math.trunc((Math.random() * 10));
+        console.log('index: ',index)
+        this.setState({visible: true})
+        this.setState({challenge: challenges[index].question})
+        console.log('challenge: ', challenge)
+        this.handleChallengeAnswer(challenge);
+        if(playerWin) {
+          console.log('pw: ',playerWin)
+          this.setState({princRoom: rooms[1], playerRoom: playerDest})
 
-        // if(playerWin) {
-        //   this.setState({princRoom: rooms[1], playerRoom: playerDest})
-        // } else {
-        //   console.log('game over!')
-        //   return;
-        // }
+        } else {
+          return;
+        }
       }
     }
     else if (playerDest === princRoom) {
@@ -84,16 +89,29 @@ class App extends Component {
   }
 
   handleChallengeAnswer({target}) {
-    // console.log(typeof target, target)
-    console.log('handling: ', target.value);
-    this.setState({playerAnswer: target.value})
+    const {playerAnswer, challenge, playerWin } = this.state;
 
-    // console.log({this.state.challenge})
+    console.log('handling: ', target.value, challenge);
+
+    if (target.name === 'submit') {
+      console.log('onsubmit: ',playerAnswer.value, challenge.corectAnswer)
+
+      if (playerAnswer.value === challenge.correctAnswer ) {
+        console.log('oncompate: ',playerAnswer, challenge.corectAnswer)
+
+        this.setState({playerWin : true})
+
+
+      }    else{
+        console.log('game over!')
+      }
+    }
+    this.setState({playerAnswer: target})
 
   }
 
   render() {
-    const { player, playerRoom, challenge } = this.state;
+    const { player, playerRoom, challenge, playerAnswer, visible } = this.state;
     return (
       <div className="App">
       <div className="App-header">
@@ -105,10 +123,12 @@ class App extends Component {
       onExit={this.handleRoomRelations}
       onPickup={this.handlePickup}
       />
-      <Challenge challenge={this.state.challenge}
-        onChange={event => this.handleChallengeAnswer(event)}
+      {visible &&
+      <Challenge
+        challenge={challenge}
         onSubmit={value => this.handleChallengeAnswer(value)}
-        value={this.state.playerAnswer} />
+        value={playerAnswer} />
+      }
       </div>
     );
   }

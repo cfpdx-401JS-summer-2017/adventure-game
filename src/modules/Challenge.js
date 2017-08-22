@@ -11,11 +11,11 @@ Challenge.propTypes = {
 Submit.propTypes = {
   onSubmit: PropTypes.func
 };
+const challenge = challenges[0];
 
-export default function Challenge({ onChange, onSubmit }) {
-  const challenge = challenges[0];
+export default function Challenge({ onSubmit }) {
   return (
-    <div>
+    <div className="visible">
       <div
         className="question"
         name="challengeQuestion"
@@ -32,7 +32,6 @@ export default function Challenge({ onChange, onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="A"
-            onChange={value => onChange(value)}
           />
         </label>
       </div>
@@ -43,7 +42,6 @@ export default function Challenge({ onChange, onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="B"
-            onChange={value => onChange(value)}
           />
         </label>
       </div>
@@ -54,7 +52,6 @@ export default function Challenge({ onChange, onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="C"
-            onChange={value => onChange(value)}
           />
         </label>
       </div>
@@ -65,11 +62,10 @@ export default function Challenge({ onChange, onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="D"
-            onChange={value => onChange(value)}
           />
         </label>
       </div>
-      <Submit onSubmit={event => onChange(event)} />
+      <Submit value={challenge} onSubmit={value => onSubmit(value)}/>
     </div>
   );
 }
@@ -80,8 +76,8 @@ export function Submit({ onSubmit }) {
       <label>
         Submit
         <input
+          name="submit"
           type="button"
-          value="submit"
           onClick={value => onSubmit(value)}
         />
       </label>
