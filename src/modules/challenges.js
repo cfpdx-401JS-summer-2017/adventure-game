@@ -1,11 +1,12 @@
 const challenges =  [
   {
     question: 'What is 2 + 2?',
-    answer: 4
-  },
-  {
-    question: 'What is 3 x 6?',
-    answer: 18
+    answerA: '4',
+    answerB: '5',
+    answerC: '6',
+    answerD: '8',
+    corectAnswer: 'A',
+    state: 'incorrect'
   }
 ]
 

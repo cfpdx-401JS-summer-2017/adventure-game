@@ -8,13 +8,13 @@ import challenges from './modules/challenges'
 import Challenge from './modules/Challenge'
 import './App.css';
 
-// TODO passing in hall problem
-// TODO challenges
+
 // TODO adjacent room warning
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       rooms: rooms,
       playerRoom: rooms[0],
@@ -26,19 +26,26 @@ class App extends Component {
       player: chars.player,
       principal: chars.principal,
       message: '',
-      challenge: ''
+      challenge: {
+        question: '',
+        answerA: '',
+        answerB: '',
+        answerC: '',
+        answerD: '',
+        correctAnswer: '',
+        state: ''
+      }
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
+    this.handleChallengeAnswer = this.handleChallengeAnswer.bind(this);
   }
 
   handleRoomRelations(playerDest) {
     const {player, princRoom, rooms, playerRoom} = this.state;
-      // TODO create princ in adjacent room warning
     if(playerRoom === princRoom) {
       // console.log('playerRoom === princRoom: ',playerRoom.key, princRoom.key)
       console.log('same room');
-      // console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
         console.log('hall pass = safe!');
         this.setState({princRoom: rooms[1], playerRoom: playerDest})
@@ -46,7 +53,7 @@ class App extends Component {
         console.log('time for a challenge!')
         // let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
         // console.log('pw: ', playerWin);
-        this.setState({message: challenges[0].question})
+        // this.setState({message: challenges[0].question})
 
         // if(playerWin) {
         //   this.setState({princRoom: rooms[1], playerRoom: playerDest})
@@ -57,14 +64,12 @@ class App extends Component {
       }
     }
     else if (playerDest === princRoom) {
-      // console.log('playerDest === princRoom: ',playerDest.key, princRoom.key)
       this.setState({playerRoom: playerDest})
     }
     else if(playerDest !== princRoom) {
       this.setState({playerRoom: playerDest})
       let princDest = move(princRoom, playerDest)
       this.setState({princRoom: princDest})
-      // console.log('playerRoom !== princRoom: ',playerRoom.key, princRoom.key)
     }
   }
 
@@ -80,8 +85,15 @@ class App extends Component {
     this.setState({princRoom: princDest});
   }
 
+  handleChallengeAnswer({target}) {
+    console.log('handling: ', target);
+
+    // console.log({this.state.challenge})
+
+  }
+
   render() {
-    const { player, playerRoom } = this.state;
+    const { player, playerRoom, challenge } = this.state;
     return (
       <div className="App">
       <div className="App-header">
@@ -93,8 +105,7 @@ class App extends Component {
       onExit={this.handleRoomRelations}
       onPickup={this.handlePickup}
       />
-      <Challenge challenge={this.state.challenge}/>
-      <div className="warning">{this.state.message}</div>
+      <Challenge challenge={this.state.challenge} onChoice={target => this.handleChallengeAnswer(target)}/>
       </div>
     );
   }
