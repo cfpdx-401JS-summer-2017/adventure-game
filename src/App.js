@@ -11,7 +11,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      screen: Start,
+      screen: 'startScreen',
+      win: null,
       rooms: rooms,
       playerRoom: rooms[0],
       princRoom: rooms[1],
@@ -24,13 +25,14 @@ class App extends Component {
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
-    this.startGame = this.startGame.bind(this);
+    this.changeScreen = this.changeScreen.bind(this);
   }
 
-  // To do: hide the game until start is clicked
-  // show the game when startGame runs
-  startGame() {
-
+  changeScreen() {
+    if(this.state.screen === 'startScreen') this.setState({ screen: 'gameScreen' });
+    else if(this.state.screen === 'gameScreen' && this.win === true) this.setState({ screen: 'winScreen' });
+    else if(this.state.screen === 'gameScreen' && this.win === false) this.setState({ screen: 'loseScreen' });
+    else this.setState({ screen: 'startScreen' });
   }
 
   handleRoomRelations(playerDest) {
@@ -80,16 +82,36 @@ class App extends Component {
     const { player, playerRoom } = this.state;
     return (
       <div className="App">
-        <Start startGame={this.startGame} />
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h6>{player.name}</h6>
-          <h6>{player.inventory.join(', ')}</h6>
         </div>
-        <Room room={playerRoom}
-          onExit={this.handleRoomRelations}
-          onPickup={this.handlePickup}
-        />
+        <div className="start">
+          {this.state.screen === 'startScreen' && <Start onStart={this.changeScreen} />}
+        </div>
+        <div className="game">
+          {this.state.screen === 'gameScreen' && 
+          <div> 
+            <h6>{player.name}</h6>
+            <h6>{player.inventory.join(', ')}</h6>
+            <Room room={playerRoom}
+              onExit={this.handleRoomRelations}
+              onPickup={this.handlePickup}
+            />
+          </div>}
+        </div>
+        <div className="win">
+          {this.state.screen === 'winScreen' && 
+          <div>
+
+          </div>} 
+        </div>
+        <div className="lose">
+          {this.state.screen === 'loseScreen' && 
+          <div>
+
+          </div>} 
+        </div>
+
       </div>
     );
   }
