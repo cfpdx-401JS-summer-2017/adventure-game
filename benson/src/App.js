@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import rooms from './models/rooms';
-import enemies from './models/enemies';
+import './models/enemies';
 import burger from './img/burger.jpg';
 
 class App extends Component {
@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   handlePickup(item) {
-    const { room, player, image } = this.state;
+    const { room, player } = this.state;
     const index = room.items.indexOf(item);
     if (index > -1) room.items.splice(index, 1);
     player.inventory.push(item);
@@ -48,13 +48,11 @@ class App extends Component {
   }
 
   hasBean(bean) {
-    const { room, player } = this.state;
     return this.state.player.inventory.some(item => item === bean);
-
   }
 
   checkWeakness(enemy) {
-    const { room, player, message } = this.state;
+    const { player } = this.state;
     this.setState({message:''})
     const index = player.inventory.indexOf(enemy.weakness)
     if (index > -1) {
@@ -93,7 +91,7 @@ function Room({ room, image, message, initText, onExit, onPickup, onKill, hasBea
   return (
     <div id="room-div">
       <h2>{room.name}</h2>
-      <img src={image}></img>
+      <img src={image} alt=""></img>
       <p>{initText}</p>
       {room.enemies &&
         <div>
