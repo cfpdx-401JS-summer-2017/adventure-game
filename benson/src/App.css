@@ -1,5 +1,23 @@
 .App {
   text-align: center;
+  /* max-width: 50%; */
+  margin: 0 auto;
+}
+
+#room-div {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.App-header {
+  background-image: url("./img/castle.png");
+  min-width: 100%;
+  padding: 20px 0;
+}
+
+img {
+  max-width: 300px;
+  max-height: auto;
 }
 
 .App-intro {

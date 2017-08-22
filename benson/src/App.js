@@ -71,8 +71,8 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <h2>Benson's Burger</h2>
-          <h6>{player.name}</h6>
-          <h6>{player.inventory.join(', ')}</h6>
+          <h6>Starring {player.name}</h6>
+          <h6>Benson has: {player.inventory.join(', ')}</h6>
         </div>
         <Room room={room}
           initText={initText}
@@ -91,12 +91,12 @@ class App extends Component {
 
 function Room({ room, image, message, initText, onExit, onPickup, onKill, hasBean, checkWeakness }) {
   return (
-    <div>
+    <div id="room-div">
       <h2>{room.name}</h2>
       <img src={image}></img>
       <p>{initText}</p>
       {room.enemies &&
-        <p>
+        <div>
           {room.enemies.map((enemy, i) => (
             <div>
               <p>{enemy.enemyText}</p>
@@ -105,7 +105,7 @@ function Room({ room, image, message, initText, onExit, onPickup, onKill, hasBea
               </button>
             </div>
           ))}
-        </p>
+        </div>
       }
       <p>{message}</p>
       {room.enemies === null &&
