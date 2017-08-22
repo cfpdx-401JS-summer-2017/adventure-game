@@ -31,7 +31,8 @@ class App extends Component {
 
   handleKeyPress(event) {
     const keyVal = getKeyPress(event);
-    
+    const { player } = this.state;
+
     if (keyVal[0] === 'invalid') {
       this.setState({
         gameMsg: '',
@@ -57,7 +58,6 @@ class App extends Component {
     
     else if (keyVal[0] === 'p') {
       if (rooms[roomNum].items.length > 0 && rooms[roomNum].items[0].hidden === false) {
-        const { player } = this.state;
         player.items.push(rooms[roomNum].items[0].item);
         rooms[roomNum].items = [];
         this.setState({
@@ -71,7 +71,19 @@ class App extends Component {
           errorMsg: 'Pick up what? Nothing here.'
         });
       }
-    } 
+    }
+    
+    else if (keyVal[0] === 'd') {
+      if (player.items.length > 0) {
+        // update what got dropped!
+      } else {
+        this.setState({
+          gameMsg: '',
+          errorMsg: 'You empty your pockets, but find nothing to drop.'
+        });
+      }
+    }
+    
   }
 
   render() {

@@ -7,12 +7,20 @@ body {
 }
 header {
   margin: 2em 0;
-  padding: .5em 1em 1em;
+  padding: .5em 8px 1em;
   background: #ccc;
   color: #222;
-  font-size: .7em;
+  font-size: .75em;
   font-weight: 700;
 }
-p#tagline {
-  font-size: .7em;
+
+@media screen and (max-width: 480px) {
+  header {
+    font-size: .65em;
+  }
+}
+@media screen and (max-width: 320px) {
+  header {
+    font-size: .55em;
+  }
 }
