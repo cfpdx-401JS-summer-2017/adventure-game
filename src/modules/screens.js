@@ -23,6 +23,9 @@ export function Win({onWin}) {
 				Percy Prankster makes his way out of the school with all the evidence of his dirty deeds.
       </p>
       <button onClick={() => onWin()}>Restart the Game</button>
+      <p>
+        Credits: Wendy Beck, Christopher Thomson, Stephanie Fitzgerald
+      </p>
     </div>
   );
 }
@@ -35,6 +38,9 @@ export function Lose({onLose}) {
 				Mr. Mean Principal caught Percy Prankster as he was perpetrating his misdeeds. You will now be suspended and be forced to attend summer school where they will watch you like a hawk.
       </p>
       <button onClick={() => onLose()}>Restart the Game</button>
+      <p>
+        Credits: Wendy Beck, Christopher Thomson, Stephanie Fitzgerald
+      </p>
     </div>
   );
 }
