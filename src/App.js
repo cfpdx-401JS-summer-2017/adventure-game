@@ -6,6 +6,10 @@ import chars from './modules/chars';
 import move from './modules/principal';
 import './App.css';
 
+// TODO passing in hall problem
+// TODO challenges
+// TODO adjacent room warning
+
 class App extends Component {
   constructor(props) {
     super(props);
