@@ -1,0 +1,24 @@
+#app p {
+  margin: 1em;
+}
+#input {display: table; width: 100%}
+#inputLeft {display: table-cell; vertical-align: top; width: 16px; padding-top: 5px;}
+#inputRight {display: table-cell; vertical-align: top; width: calc(100% - 16px);}
+textarea.gameInput {
+  border: none;
+  background: #227;
+  color: #eee;
+  font-family: 'Inconsolata', monospace;
+  font-size: 1em;
+  width: 100%;
+  resize: none;
+}
+textarea.gameInput:focus {
+  outline: none;
+}
+.roomMsg   { color: #ff3; }
+.itemMsg   { color: #f93; }
+.charMsg   { color: #f39; }
+.gameMsg   { color: #6f6; }
+.errorMsg  { color: #f55; }
+.playerMsg { color: #bdf; }
