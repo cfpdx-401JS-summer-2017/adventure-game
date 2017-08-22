@@ -92,7 +92,7 @@ function Room({ room, onExit, onPickup, onKill, hasBean, checkWeakness }) {
             <div>
               <p>{enemy.enemyText}</p>
               <button key={i} onClick={() => checkWeakness(enemy, enemy.weakness)}>
-                Kill {enemy.name}
+                Attack {enemy.name}
               </button>
             </div>
           ))}

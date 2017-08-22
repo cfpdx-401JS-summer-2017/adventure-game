@@ -15,7 +15,7 @@ const foyer = {
     items: [],
     enemies: null,
     doors: ['throne', 'hallway'],
-    initText: 'Having climbed the beanstalk, Benson spies a great castle resting atop the clouds. The smell of the divine burg is strong, and benson soon finds himself in a grand foyer within the castle. Testing all the door handles,he finds that the only unlocked areas seem to be through a grand set of double-doors as tall as twenty Bensons, and an unassuming doorway that seems to lead further in.'
+    initText: 'Having climbed the beanstalk, Benson spies a great castle resting atop the clouds. The smell of the divine burg is strong, and Benson soon finds himself in a grand foyer within the castle. Testing all the door handles,he finds that the only unlocked areas seem to be through a grand set of double-doors as tall as twenty Bensons, and an unassuming doorway that seems to lead further in.'
 };
 
 const hallway = {
