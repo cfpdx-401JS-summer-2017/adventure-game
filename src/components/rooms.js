@@ -1,4 +1,6 @@
 
+import characters from './characters';
+
 const rooms = [
     {
         key: 0,
@@ -28,7 +30,7 @@ const rooms = [
         key: 4,
         directions: ['up'],
         items: [],
-        characters: ['panda']
+        characters: [characters[1]]
     },
     {
         key: 5,
@@ -46,7 +48,7 @@ const rooms = [
         key: 7,
         directions: ['down'],
         items: [],
-        characters: ['penguin']
+        characters: [characters[0]]
     },
     {
         key: 8,
@@ -82,7 +84,7 @@ const rooms = [
         key: 13,
         directions: ['right', 'left'],
         items: [],
-        characters: ['locked door']
+        characters: [characters[2]]
     },
     {
         key: 14,
@@ -94,7 +96,7 @@ const rooms = [
         key: 15,
         directions: ['down'],
         items: [],
-        characters: ['tiger']
+        characters: [characters[3]]
     }
 ];
 

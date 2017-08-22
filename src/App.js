@@ -57,8 +57,8 @@ class App extends Component {
     } 
     
     else if (keyVal[0] === 'p') {
-      if (rooms[roomNum].items.length > 0 && rooms[roomNum].items[0].hidden === false) {
-        player.items.push(rooms[roomNum].items[0].item);
+      if ( rooms[roomNum].items.length > 0 ) {
+        player.items.push( rooms[roomNum].items[0] );
         rooms[roomNum].items = [];
         this.setState({
           player: player,
@@ -75,15 +75,11 @@ class App extends Component {
     
     else if (keyVal[0] === 'd') {
       if (player.items.length > 0) {
-        const itemObj = {
-          item: player.items[0],
-          hidden: false
-        }
-        rooms[roomNum].items.push(itemObj);
+        rooms[roomNum].items.push( player.items[0] );
         player.items = [];
         this.setState({
           player: player,
-          gameMsg: 'You dropped ' + rooms[roomNum].items[0].item + '.',
+          gameMsg: 'You dropped ' + rooms[roomNum].items[0] + '.',
           errorMsg: ''
         });
       } else {
@@ -97,6 +93,20 @@ class App extends Component {
     else if (keyVal[0] === 'u') {
       if (player.items.length > 0) {
         if (rooms[roomNum].characters.length > 0) {
+            if ( player.items[0] === rooms[roomNum].characters[0].need) {
+              player.items[0] = rooms[roomNum].characters[0].item;
+              rooms[roomNum].characters[0].need = '';
+              this.setState({
+                player: player,
+                gameMsg: rooms[roomNum].characters[0].speech[0].right,
+                errorMsg: ''
+              })
+            } else {
+              this.setState({
+                gameMsg: '',
+                errorMsg: rooms[roomNum].characters[0].speech[0].wrong
+              });  
+            }
           // handle use here
         } else {
           this.setState({

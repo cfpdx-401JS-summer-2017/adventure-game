@@ -7,10 +7,11 @@ export function Room({ room }) {
   const roomMsg = makeSentence(dirArr);
   
   let itemMsg = '';
-  if (room.items.length > 0 && room.items[0].hidden === false) itemMsg = ' You see ' + room.items[0].item + ' on the ground.';
+  if ( room.items.length > 0 ) itemMsg = ' You see ' + room.items[0] + ' on the ground.';
   
   let charMsg = '';
-  if (room.characters.length > 0) charMsg = ' You see a ' + room.characters[0] + '.';
+  console.log(room.characters);
+  if (room.characters.length > 0) charMsg = ' You see a ' + room.characters[0].name + '.';
   
   return (
     <div>
