@@ -17,14 +17,20 @@ class App extends Component {
       act: 0,
       scene: 0,
       player: {
-        lives: 3
-      }
+        lives: 3,
+        move: null,
+        moveTime: null,
+      },
+      
     }
 
-    this.handleMove = this.handleMove.bind(this);;
     this.newGame = this.newGame.bind(this);
+    this.playVideo = this.playVideo.bind(this);
+    this.evaluateMove = this.evaluateMove.bind(this);
+
+    this.handleMove = this.handleMove.bind(this);
     this.handleVideoPause = this.handleVideoPause.bind(this);
-    // this.determineIfNeedToEvaluate = this.determineIfNeedToEvaluate.bind(this);
+    this.handleVideoEnd = this.handleVideoEnd.bind(this);
   }
 
   componentDidMount() {
@@ -42,91 +48,77 @@ class App extends Component {
   }
   
   handleVideoPause() {
-    alert('video had paused');
-
-    //check if user input is correct
-    //decide if advance game or die
+    console.log('video paused');
+    console.log('>>>>> ACT', this.state.act, 'SCENE', this.state.scene, '<<<<<')
+    this.evaluateMove();
   }
 
-  // handleVideoTimeReached() {
-
-  //   let now = this.currentTime;
-  //   console.log("running event listener", now);
-
-        // let stopTime = 12;
-        // let stopTime = acts[this.state.act].scenes[this.state.scene].stop;
-
-        // if(now >= stopTime) {
-        //     this.pause();
-        // }
-
-    // let currentTime = document.getElementById("dragonPlayer").currentTime;
-    // console.log(currentTime);
-
-    // let stopTime = acts[this.state.act].scenes[this.state.scene].stop;
-
-  //   if(currentTime === stopTime) {
-  //     document.getElementById("dragonPlayer").pause();
-  //   }
-  // }
-
-  // determineIfNeedToEvaluate(time) {
-    
-  //   let stopTime = acts[this.state.act].scenes[this.state.scene].stop;
-
-  //   if(time == stopTime) alert('stop video');
-
-  // }
-
+  handleVideoEnd() {
+    console.log('video ended');
+    let nextVideo = acts[this.state.act].scenes[this.state.scene].challengeVideo;
+    this.playVideo(nextVideo);
+  }
+  
   handleMove(move) {
+    let moveTime = document.getElementById("dragonPlayer").currentTime;
+    let lives = this.state.lives;
+    this.setState({ player: { move, moveTime, lives } });
     
-    let userTime = document.getElementById("dragonPlayer").currentTime;
-    console.log('user pressed', move, 'time', userTime);
-
+    console.log('user move', move, 'time', moveTime);
+  }
+  
+  evaluateMove() {
+    let correctMove = acts[this.state.act].scenes[this.state.scene].correct;
     let correctTimeStart = acts[this.state.act].scenes[this.state.scene].start;
     let correctTimeStop = acts[this.state.act].scenes[this.state.scene].stop;
-    let correctMove = acts[this.state.act].scenes[this.state.scene].correct;
-    console.log('correct time', correctTimeStart, correctTimeStop, 'move', move);
+    let nextVideo = null;
+    
+    if (this.state.player.move === correctMove) { 
+      // check if game is won
+      if (this.state.act === acts.length && this.state.scene === acts[this.state.act].scenes.length) {
+        this.setState({ gameStatus: 'win' });
+      } else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
+        // go to next scene
+        let scene = this.state.scene + 1;
+        this.setState({ scene })
 
+        // play next videos
+        nextVideo = acts[this.state.act].scenes[this.state.scene].prevSuccessVideo;
+        this.playVideo(nextVideo);
+        // nextVideo = acts[this.state.act].scenes[this.state.scene].challengeVideo;
+        // this.playVideo(nextVideo);
 
-    // check if input is allowed at this time
-    if (userTime <= correctTimeStop && userTime >= correctTimeStart) {
-
-      if (move === correctMove) { 
-        // check if won game
-        if(this.state.act === acts.length && this.state.scene === acts[this.state.act].scenes.length) {
-          this.setState({ gameStatus: 'win' });
-        } else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
-          // go to next scene
-          let scene = this.state.scene + 1;
-          this.setState({ scene })
-        } else {
-          // go to next act
-          let act = this.state.act + 1;
-          this.setState({ act, scene: 0 })
-        }
 
       } else {
-        if(this.state.player.lives > 0) {
-          document.getElementById("dragonPlayer").pause();
+        // go to next act
+        let act = this.state.act + 1;
+        this.setState({ act, scene: 0 })
 
-          // take away a life
-          // let soundOfDeath = new Audio('./sounds/death.mp3');
-          // soundOfDeath.play();
-          
-          let lives = this.state.player.lives - 1;
-          this.setState({ player: { lives } })
-          //show death scene...
-        } else {
-          //show death scene...
-          // go to game over
-          this.setState({ gameStatus: "lose"});
-        }
+        // play next videos
+        // nextVideo = acts[this.state.act].scenes[this.state.scene].prevSuccessVideo;
+        // this.playVideo(nextVideo);
+
+        nextVideo = acts[this.state.act].scenes[this.state.scene].challengeVideo;
+        this.playVideo(nextVideo);
       }
+    } else {
+      // check if user has lives
+      if (this.state.player.lives > 0) {
+        // take away a life
+        let lives = this.state.player.lives - 1;
+        this.setState({ player: { lives } })
+        nextVideo = acts[this.state.act].scenes[this.state.scene].deathVideo;
+        this.playVideo(nextVideo);
+        
+        // play next challenge....
 
-    }
-    else {
-      console.log('can not submit move');
+      } else {
+        //show death scene
+        nextVideo = acts[this.state.act].scenes[this.state.scene].deathVideo;
+        this.playVideo(nextVideo);
+        // go to game over
+        this.setState({ gameStatus: "lose"});
+      }
     }
 
   }
@@ -142,6 +134,13 @@ class App extends Component {
     });
   }
 
+  playVideo(videoSource) {
+    let player = document.getElementById('dragonPlayer');
+    player.src = videoSource;
+    player.load();
+    player.play();
+  }
+
   render() {
     if(this.state.gameStatus === 'splash') return <Splash handleClick = {this.newGame} />;
 
@@ -153,8 +152,9 @@ class App extends Component {
               name = {acts[this.state.act].name}
               instructions = {acts[this.state.act].instructions}
               handleClick = {this.handleMove}
-              videoSource = {acts[this.state.act].scenes[this.state.scene].video}
+              videoSource = {acts[this.state.act].scenes[this.state.scene].challengeVideo}
               handleVideoPause = {this.handleVideoPause}
+              handleVideoEnd = {this.handleVideoEnd}
               />
       )
     
