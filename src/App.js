@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import rooms from './components/rooms';
-import player from './components/player';
+import { Player } from './components/Player';
+import { Room } from './components/Room';
+import handleKeyPress from './components/handleKeyPress';
 
 class App extends Component {
   constructor() {
@@ -9,14 +11,21 @@ class App extends Component {
     this.state = {
       rooms, 
       room: rooms[1],
-      player
+      player: {
+        name: '',
+        items: []
+      }
     };
-    this.handleChange = this.handleChange.bind(this);
+    // handleKeyPress = handleKeyPress.bind(this);
   }
 
-  handleChange(event) {
-  console.log(event.target.value);
-  }
+  
+
+  // handleKeyPress(event) {
+  //   console.log(event.key);
+  //
+  // }
+  // }
 
   render() {
     const { room, player } = this.state;
@@ -25,29 +34,11 @@ class App extends Component {
         <p>You are standing in a maze.</p>
         <Room room={room} />
         <Player player={player} />
-        <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" onChange={this.handleChange} /></p>
+        <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" onKeyDown={(event) => handleKeyPress(event, room)} placeholder="&#8593;=up, &#8595;=down"/></p>
       </div>
     );
   }
 }
 
-function Room({ room }) {
-  const dirArr = room.directions;
-  const roomDir = 'You see exits ' + dirArr.slice(0, dirArr.length - 1).join(', ') + ', and ' + dirArr.slice(-1) + '.';
-  return (
-    <div>
-      <p>{roomDir}</p>
-    </div>
-  );
-}
-
-function Player({ player }) {
-  const playerItems = 'You are carrying ' + player.items + '.';
-  return (
-    <div>
-      <p>{playerItems}</p>
-    </div>
-  );
-}
 
 export default App;

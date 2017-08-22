@@ -16,11 +16,11 @@ Maze: 16 rooms(directions, actions, items, opponents)
 
 Characters (enter name):
 - Directions:
-- North
-- South
-- East
-- West
-- Action
+- Up
+- Down
+- Right
+- Left
+- Actions:
 - Pick up
 - Drop
 - Use
