@@ -27,15 +27,15 @@ const URDS= U+R+D+S;
 const acts = {
     // FIRST ACT
     bridgeAndThreeDoors: {
-        video: '/videos/S01Home.mp4',
-        revive: 'S02R.mp4',
+        video: '/videos/S01Home.mp4#t=0,12',
+        revive: '/videos/S02R.mp4',
         scenes: [
             { start: 10, stop: 12, correct: S, death: 'S02D1.mp4' },
             { start: 22, stop: 24, correct: R, death: 'S02D3.mp4' },
         ]
     },
     tentacles: {
-        video: 'S03.mp4',
+        video: '/videos/S03.mp4',
         revive: '/videos/S03R.mp4',
         scenes: [
             { start: 1, stop: 3, correct: S, death: 'S03D1.mp4' },

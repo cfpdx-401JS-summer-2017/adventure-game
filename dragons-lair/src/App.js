@@ -17,14 +17,14 @@ class App extends Component {
       act: 0,
       scene: 0,
       player: {
-        lives: 3,
-        coins: 0,
+        lives: 3
       }
     }
 
     this.handleMove = this.handleMove.bind(this);;
     this.newGame = this.newGame.bind(this);
-    this.handleVideoEnd = this.handleVideoEnd.bind(this);
+    this.handleVideoPause = this.handleVideoPause.bind(this);
+    // this.determineIfNeedToEvaluate = this.determineIfNeedToEvaluate.bind(this);
   }
 
   componentDidMount() {
@@ -41,9 +41,39 @@ class App extends Component {
     if (key === 88) this.handleMove('NONE');
   }
   
-  handleVideoEnd() {
-    alert('video had ended');
+  handleVideoPause() {
+    alert('video had paused');
   }
+
+  // handleVideoTimeReached() {
+
+  //   let now = this.currentTime;
+  //   console.log("running event listener", now);
+
+        // let stopTime = 12;
+        // let stopTime = acts[this.state.act].scenes[this.state.scene].stop;
+
+        // if(now >= stopTime) {
+        //     this.pause();
+        // }
+
+    // let currentTime = document.getElementById("dragonPlayer").currentTime;
+    // console.log(currentTime);
+
+    // let stopTime = acts[this.state.act].scenes[this.state.scene].stop;
+
+  //   if(currentTime === stopTime) {
+  //     document.getElementById("dragonPlayer").pause();
+  //   }
+  // }
+
+  // determineIfNeedToEvaluate(time) {
+    
+  //   let stopTime = acts[this.state.act].scenes[this.state.scene].stop;
+
+  //   if(time == stopTime) alert('stop video');
+
+  // }
 
   handleMove(move) {
     
@@ -65,8 +95,6 @@ class App extends Component {
           this.setState({ gameStatus: 'win' });
         } else if(this.state.scene < (acts[this.state.act].scenes.length - 1)) {
           // go to next scene
-
-
           let scene = this.state.scene + 1;
           this.setState({ scene })
         } else {
@@ -77,12 +105,14 @@ class App extends Component {
 
       } else {
         if(this.state.player.lives > 0) {
+          document.getElementById("dragonPlayer").pause();
+
           // take away a life
           // let soundOfDeath = new Audio('./sounds/death.mp3');
           // soundOfDeath.play();
           
           let lives = this.state.player.lives - 1;
-          this.setState({ player: { lives, coins: 0 } })
+          this.setState({ player: { lives } })
           //show death scene...
         } else {
           //show death scene...
@@ -105,7 +135,6 @@ class App extends Component {
       scene: 0,
       player: {
         lives: 3,
-        coins: 0,
       }
     });
   }
@@ -122,7 +151,7 @@ class App extends Component {
               instructions = {acts[this.state.act].instructions}
               handleClick = {this.handleMove}
               videoSource = {acts[this.state.act].video}
-              handleVideoEnd = {this.handleVideoEnd}
+              handleVideoPause = {this.handleVideoPause}
               />
       )
     
