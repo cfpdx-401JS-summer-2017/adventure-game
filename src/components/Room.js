@@ -1,17 +1,24 @@
 import React from 'react';
 
 export function Room({ room }) {
+  
   const dirArr = room.directions;
-  let roomMsg = makeSentence(dirArr);
-  if (room.items.length > 0) {
-    roomMsg += ' You see a ' + room.items[0] + '.';
-  }
-  if (room.characters.length > 0) {
-    roomMsg += ' You see a ' + room.characters[0] + '.';
-  }
+  
+  const roomMsg = makeSentence(dirArr);
+  
+  let itemMsg = '';
+  if (room.items.length > 0 && room.items[0].hidden === false) itemMsg = ' You see a ' + room.items[0].item + ' on the ground.';
+  
+  let charMsg = '';
+  if (room.characters.length > 0) charMsg = ' You see a ' + room.characters[0] + '.';
+  
   return (
     <div>
-      <p>{roomMsg}</p>
+      <p>
+        <span className="roomMsg">{roomMsg}</span>
+        <span className="itemMsg">{itemMsg}</span>
+        <span className="charMsg">{charMsg}</span>
+      </p>
     </div>
   );
 }

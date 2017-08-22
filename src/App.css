@@ -12,12 +12,8 @@ input.gameInput {
 input.gameInput:focus {
   outline: none;
 }
-.exit {
-  color: #772;
-}
-.gameMsg {
-  color: #6f6;
-}
-.errorMsg {
-  color: #f66;
-}
+.roomMsg  { color: #ff3; }
+.itemMsg  { color: #f93; }
+.charMsg  { color: #f39; }
+.gameMsg  { color: #6f6; }
+.errorMsg { color: #f55; }

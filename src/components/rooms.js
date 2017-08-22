@@ -3,7 +3,10 @@ const rooms = [
     {
         key: 0,
         directions: ['right'],
-        items: ['fish'],
+        items: [{
+            item: 'fish',
+            hidden: false
+        }],
         characters: []
     },
     {
@@ -27,7 +30,10 @@ const rooms = [
     {
         key: 4,
         directions: ['up'],
-        items: ['key'],
+        items: [{
+            item: 'key',
+            hidden: true
+        }],
         characters: ['panda']
     },
     {
@@ -39,13 +45,19 @@ const rooms = [
     {
         key: 6,
         directions: ['up'],
-        items: ['bahn mi'],
+        items: [{
+            item: 'bahn mi',
+            hidden: false
+        }],
         characters: []
     },
     {
         key: 7,
         directions: ['down'],
-        items: ['bamboo'],
+        items: [{
+            item: 'bamboo',
+            hidden: true
+        }],
         characters: ['penguin']
     },
     {
@@ -81,7 +93,10 @@ const rooms = [
     {
         key: 13,
         directions: ['right', 'left'],
-        items: ['locked door'],
+        items: [{
+            item: 'locked door',
+            hidden: false
+        }],
         characters: []
     },
     {
