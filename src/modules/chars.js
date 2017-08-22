@@ -11,6 +11,6 @@ const principal = {
   room: {}
 };
 
-let chars ={player, principal}
+let chars ={player, principal};
 
 export default chars;

@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       screen: 'startScreen',
-      win: null,
+      // win: null,
       rooms: rooms,
       playerRoom: rooms[0],
       princRoom: rooms[1],
@@ -23,6 +23,7 @@ class App extends Component {
       player: chars.player,
       principal: chars.principal
     };
+    this.initialState = this.state;
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
     this.changeScreen = this.changeScreen.bind(this);
@@ -30,9 +31,7 @@ class App extends Component {
 
   changeScreen() {
     if(this.state.screen === 'startScreen') this.setState({ screen: 'gameScreen' });
-    // else if(this.state.screen === 'gameScreen' && this.win === true) this.setState({ screen: 'winScreen' });
-    else if(this.state.screen === 'gameScreen' && this.win === false) this.setState({ screen: 'loseScreen' });
-    // else this.setState({ screen: 'startScreen' });
+    else window.location.reload(true);
   }
 
   handleRoomRelations(playerDest) {
@@ -59,6 +58,7 @@ class App extends Component {
           this.setState({princRoom: rooms[1], playerRoom: playerDest});
         } else {
           console.log('game over!');
+          this.setState({ screen: 'loseScreen' });
           return;
         }
       }
@@ -131,10 +131,9 @@ class App extends Component {
         <div className="lose">
           {this.state.screen === 'loseScreen' && 
           <div>
-
-          </div>} 
+            <Lose onLose={this.changeScreen} />
+          </div> }
         </div>
-
       </div>
     );
   }
