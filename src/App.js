@@ -34,15 +34,15 @@ class App extends Component {
     // console.log('playerDest in handling: playerDest: ', playerDest.key, 'playerRoom: ', playerRoom.key, 'princRoom: ', princRoom.key);
     if(playerRoom === princRoom) {
       // console.log('playerRoom === princRoom: ',playerRoom.key, princRoom.key)
-      // console.log('same room');
+      console.log('same room');
       // console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
-        // console.log('hall pass = safe!');
+        console.log('hall pass = safe!');
         this.setState({princRoom: rooms[1], playerRoom: playerDest})
       } else {
-        // console.log('time for a challenge!')
+        console.log('time for a challenge!')
         let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
-        // console.log('pw: ', playerWin);
+        console.log('pw: ', playerWin);
         if(playerWin) {
           this.setState({princRoom: rooms[1], playerRoom: playerDest})
         } else {
