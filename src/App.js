@@ -4,7 +4,7 @@ import Room from './modules/Room';
 import rooms from './modules/rooms';
 import chars from './modules/chars';
 import move from './modules/principal';
-import challenges from './modules/challenges'
+// import challenges from './modules/challenges'
 import Challenge from './modules/Challenge'
 import './App.css';
 
@@ -25,7 +25,6 @@ class App extends Component {
       },
       player: chars.player,
       principal: chars.principal,
-      message: '',
       challenge: {
         question: '',
         answerA: '',
@@ -34,17 +33,16 @@ class App extends Component {
         answerD: '',
         correctAnswer: '',
         state: ''
-      }
+      },
+      playerAnswer: ''
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
-    this.handleChallengeAnswer = this.handleChallengeAnswer.bind(this);
   }
 
   handleRoomRelations(playerDest) {
     const {player, princRoom, rooms, playerRoom} = this.state;
     if(playerRoom === princRoom) {
-      // console.log('playerRoom === princRoom: ',playerRoom.key, princRoom.key)
       console.log('same room');
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
         console.log('hall pass = safe!');
@@ -86,7 +84,9 @@ class App extends Component {
   }
 
   handleChallengeAnswer({target}) {
-    console.log('handling: ', target);
+    // console.log(typeof target, target)
+    console.log('handling: ', target.value);
+    this.setState({playerAnswer: target.value})
 
     // console.log({this.state.challenge})
 
@@ -105,7 +105,10 @@ class App extends Component {
       onExit={this.handleRoomRelations}
       onPickup={this.handlePickup}
       />
-      <Challenge challenge={this.state.challenge} onChoice={target => this.handleChallengeAnswer(target)}/>
+      <Challenge challenge={this.state.challenge}
+        onChange={event => this.handleChallengeAnswer(event)}
+        onSubmit={value => this.handleChallengeAnswer(value)}
+        value={this.state.playerAnswer} />
       </div>
     );
   }
