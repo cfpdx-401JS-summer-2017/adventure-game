@@ -30,7 +30,7 @@ const hallway = {
 const garage = {
     key: 'garage',
     name: 'Garage',
-    items: ['Knife', 'Staplegun'],
+    items: ['Staplegun'],
     enemies: null,
     doors: ['hallway']
 };

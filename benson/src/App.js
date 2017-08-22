@@ -18,30 +18,37 @@ class App extends Component {
     this.handleExit = this.handleExit.bind(this);
     this.handlePickup = this.handlePickup.bind(this);
     this.handleKill = this.handleKill.bind(this);
+    this.hasBean = this.hasBean.bind(this);
   }
 
   handleExit(room) {
-    this.setState({room});
+    this.setState({ room });
   }
 
   handlePickup(item) {
-    const {room, player} = this.state;
+    const { room, player } = this.state;
     const index = room.items.indexOf(item);
-    if(index > -1) room.items.splice(index, 1);
+    if (index > -1) room.items.splice(index, 1);
     player.inventory.push(item);
-    this.setState({room, player})
+    this.setState({ room, player })
   }
 
   handleKill(enemies) {
-    const {room, player} = this.state;
+    const { room, player } = this.state;
     const index = room.enemies.indexOf(enemies);
-    if(index > -1) room.enemies.splice(index, 1);
+    if (index > -1) room.enemies.splice(index, 1);
     room.enemies = null;
-    this.setState({room, player});
+    this.setState({ room, player });
+  }
+
+  hasBean(bean) {
+    const { room, player } = this.state;
+    return this.state.player.inventory.some(item => item === bean );
+
   }
 
   render() {
-    const {player, room} = this.state;
+    const { player, room } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -49,18 +56,19 @@ class App extends Component {
           <h6>{player.name}</h6>
           <h6>{player.inventory.join(', ')}</h6>
         </div>
-        <Room room = {room}
-          onExit = {this.handleExit}
-          onPickup = {this.handlePickup}
-          onKill = {this.handleKill}
+        <Room room={room}
+          onExit={this.handleExit}
+          onPickup={this.handlePickup}
+          onKill={this.handleKill}
+          hasBean = {this.hasBean}
         />
       </div>
     );
   };
 }
 
-function Room({room, onExit, onPickup, onKill}) {
-  return(
+function Room({ room, onExit, onPickup, onKill, hasBean }) {
+  return (
     <div>
       <h2>{room.name}</h2>
       <p>{room.initText}</p>
@@ -68,30 +76,32 @@ function Room({room, onExit, onPickup, onKill}) {
         <p>
           {room.enemies.map((enemy, i) => (
             <div>
-          <p>{enemy.enemyText}</p>
-          <button key = {i} onClick = {() => onKill(enemy)}>
-            Kill {enemy.name}
-          </button>
-          </div>
-        ))}
+              <p>{enemy.enemyText}</p>
+              <button key={i} onClick={() => onKill(enemy)}>
+                Kill {enemy.name}
+              </button>
+            </div>
+          ))}
         </p>
       }
       {room.enemies === null &&
         <p>
           {room.items.map((item, i) => (
-          <button key = {i} onClick = {() => onPickup(item)}>
-            Pick up {item}
-          </button>
-        ))}
+            <button key={i} onClick={() => onPickup(item)}>
+              Pick up {item}
+            </button>
+          ))}
         </p>
       }
-      {room.doors.map((door, i) =>{
+      {hasBean('Magic Bean') &&
+      <p>{room.doors.map((door, i) =>{
         return(
-          <button key={i} onClick={() => onExit(door)}> 
-            Door to {door.name}
-          </button>
-        );
-      })}
+          <button key={i} onClick={() => onExit(door)}>
+        Go to {door.name}
+      </button>
+      );
+      })}</p>
+      }
     </div>
   );
 }
