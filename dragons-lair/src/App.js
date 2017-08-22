@@ -43,6 +43,9 @@ class App extends Component {
   
   handleVideoPause() {
     alert('video had paused');
+
+    //check if user input is correct
+    //decide if advance game or die
   }
 
   // handleVideoTimeReached() {
@@ -150,7 +153,7 @@ class App extends Component {
               name = {acts[this.state.act].name}
               instructions = {acts[this.state.act].instructions}
               handleClick = {this.handleMove}
-              videoSource = {acts[this.state.act].video}
+              videoSource = {acts[this.state.act].scenes[this.state.scene].video}
               handleVideoPause = {this.handleVideoPause}
               />
       )
