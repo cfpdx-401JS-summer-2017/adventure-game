@@ -4,12 +4,14 @@ import Room from './modules/Room';
 import rooms from './modules/rooms';
 import chars from './modules/chars';
 import move from './modules/principal';
+import {Start, Win, Lose} from './modules/screens';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      screen: Start,
       rooms: rooms,
       playerRoom: rooms[0],
       princRoom: rooms[1],
@@ -22,32 +24,39 @@ class App extends Component {
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
+    this.startGame = this.startGame.bind(this);
+  }
+
+  // To do: hide the game until start is clicked
+  // show the game when startGame runs
+  startGame() {
+
   }
 
   handleRoomRelations(playerDest) {
     const {player, princRoom, rooms, playerRoom} = this.state;
     if(playerRoom !== princRoom) {
       // console.log('not same room: ', princRoom,'play: ', playerDest )
-      this.setState({playerRoom: playerDest})
-      let princDest = move(princRoom, playerRoom)
-      this.setState({princRoom: princDest})
+      this.setState({playerRoom: playerDest});
+      let princDest = move(princRoom, playerRoom);
+      this.setState({princRoom: princDest});
       // this.handleRoomRelations(playerRoom)
     }
     else if(playerRoom ===  princRoom) {
-      console.log('handling: ',playerRoom, princRoom)
+      console.log('handling: ',playerRoom, princRoom);
       // console.log('same room');
-      console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
+      console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key);
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
         console.log('hall pass = safe!');
-        this.setState({princRoom: rooms[1], playerRoom: playerDest})
+        this.setState({princRoom: rooms[1], playerRoom: playerDest});
       } else {
-        console.log('time for a challenge!')
+        console.log('time for a challenge!');
         let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
         console.log('pw: ', playerWin);
         if(playerWin) {
-          this.setState({princRoom: rooms[1], playerRoom: playerDest})
+          this.setState({princRoom: rooms[1], playerRoom: playerDest});
         } else {
-          console.log('game over!')
+          console.log('game over!');
           return;
         }
       }
@@ -59,11 +68,11 @@ class App extends Component {
     const index = playerRoom.items.indexOf(item);
     if (index > -1) playerRoom.items.splice(index, 1);
     player.inventory.push(item);
-    let princDest = move(princRoom, playerRoom)
+    let princDest = move(princRoom, playerRoom);
     this.setState({
       player, princRoom:  princDest
     });
-    this.handleRoomRelations(playerRoom)
+    this.handleRoomRelations(playerRoom);
   }
 
   render() {
@@ -71,15 +80,16 @@ class App extends Component {
     const { player, playerRoom } = this.state;
     return (
       <div className="App">
-      <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h6>{player.name}</h6>
-      <h6>{player.inventory.join(', ')}</h6>
-      </div>
-      <Room room={playerRoom}
-      onExit={this.handleRoomRelations}
-      onPickup={this.handlePickup}
-      />
+        <Start startGame={this.startGame} />
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h6>{player.name}</h6>
+          <h6>{player.inventory.join(', ')}</h6>
+        </div>
+        <Room room={playerRoom}
+          onExit={this.handleRoomRelations}
+          onPickup={this.handlePickup}
+        />
       </div>
     );
   }

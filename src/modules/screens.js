@@ -1,0 +1,16 @@
+import React from 'react';
+
+export function Start(startGame) {
+  return (
+    <div className="startWrapper" style={{ width: '100%', height: '100%', zIndex: '100', backgroundColor: 'white'}}>
+      <h2>Welcome to the Game of School</h2>
+      <p>
+				You are the prime jokester at your school, but your glory days may be over. Unless you can gather all evidence of your pranks and dispose of it quickly, the principal will suspend you for good.
+      </p>
+      <p>
+				Search the rooms of your school for incriminating evidence. Pick up all of the items to win the game. If the principal catches you, use your wits to get free, or else you lose!
+      </p>
+      <button onClick={() => startGame}>Play the Game!</button>
+    </div>
+  );
+}
