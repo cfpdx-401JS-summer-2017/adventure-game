@@ -22,7 +22,8 @@ class App extends Component {
         name: ''
       },
       player: chars.player,
-      principal: chars.principal
+      principal: chars.principal,
+      message: ''
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
@@ -30,25 +31,18 @@ class App extends Component {
 
   handleRoomRelations(playerDest) {
     const {player, princRoom, rooms, playerRoom} = this.state;
-    if (playerDest === princRoom) {
-      this.setState({playerRoom: playerDest})
-    }
-    else if(playerRoom !== princRoom) {
-      this.setState({playerRoom: playerDest})
-      let princDest = move(princRoom, playerRoom)
-      this.setState({princRoom: princDest})
-    }
-    else if(playerRoom === princRoom) {
-      console.log('handling: ',playerRoom, princRoom)
+    // console.log('playerDest in handling: playerDest: ', playerDest.key, 'playerRoom: ', playerRoom.key, 'princRoom: ', princRoom.key);
+    if(playerRoom === princRoom) {
+      // console.log('playerRoom === princRoom: ',playerRoom.key, princRoom.key)
       // console.log('same room');
-      console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
+      // console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
-        console.log('hall pass = safe!');
+        // console.log('hall pass = safe!');
         this.setState({princRoom: rooms[1], playerRoom: playerDest})
       } else {
-        console.log('time for a challenge!')
+        // console.log('time for a challenge!')
         let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
-        console.log('pw: ', playerWin);
+        // console.log('pw: ', playerWin);
         if(playerWin) {
           this.setState({princRoom: rooms[1], playerRoom: playerDest})
         } else {
@@ -57,22 +51,41 @@ class App extends Component {
         }
       }
     }
+    else if (playerDest === princRoom) {
+      // console.log('playerDest === princRoom: ',playerDest.key, princRoom.key)
+      this.setState({playerRoom: playerDest})
+    }
+    else if(playerDest !== princRoom) {
+      this.setState({playerRoom: playerDest})
+      let princDest = move(princRoom, playerDest)
+      this.setState({princRoom: princDest})
+      // console.log('playerRoom !== princRoom: ',playerRoom.key, princRoom.key)
+
+    }
+
+
   }
 
   handlePickup(item) {
     const { playerRoom, player, princRoom } = this.state;
+    console.log('2 in pickup - about to handle: ', princRoom.key, playerRoom.key)
+    this.handleRoomRelations(playerRoom)
     const index = playerRoom.items.indexOf(item);
     if (index > -1) playerRoom.items.splice(index, 1);
     player.inventory.push(item);
+
     let princDest = move(princRoom, playerRoom)
-    this.setState({
-      player, princRoom:  princDest
-    });
-    this.handleRoomRelations(playerRoom)
+    this.setState({princRoom: princDest});
+
+    //     // console.log('2 in pickup - about to handle: ', princDest.key, playerRoom.key)
+
+    // this.setState({
+    //   player, princRoom:  princDest
+    // });
+    // this.handleRoomRelations(playerRoom)
   }
 
   render() {
-    // console.log(player)
     const { player, playerRoom } = this.state;
     return (
       <div className="App">
@@ -85,11 +98,10 @@ class App extends Component {
       onExit={this.handleRoomRelations}
       onPickup={this.handlePickup}
       />
+      <div className="warning">{this.state.message}</div>
       </div>
     );
   }
 }
-
-
 
 export default App;
