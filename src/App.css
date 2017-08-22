@@ -10,6 +10,7 @@ input.gameInput {
   color: #eee;
   font-family: 'Inconsolata', monospace;
   font-size: 1em;
+  width: 95%;
 }
 input.gameInput:focus {
   outline: none;
