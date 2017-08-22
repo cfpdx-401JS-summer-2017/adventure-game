@@ -2,31 +2,31 @@
 export default function getKeyPress(event) {
     switch (event.keyCode) {
         case 37: {
-            return 'left';
+            return ['left', -1];
         }
         case 38: {
-            return 'up';
+            return ['up', 4];
         }
         case 39: {
-            return 'right';
+            return ['right', 1];
         }
         case 40: {
-            return 'down';
+            return ['down', -4];
         }
         case 80: {
-            return 'p';
+            return ['p'];
         }
         case 68: {
-            return 'd';
+            return ['d'];
         }
         case 85: {
-            return 'u';
+            return ['u'];
         }
         case 83: {
-            return 's';
+            return ['s'];
         }
         default: {
-            return 'invalid';
+            return ['invalid'];
         }
     }
 }

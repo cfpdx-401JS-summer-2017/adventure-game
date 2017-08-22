@@ -30,16 +30,16 @@ class App extends Component {
 
   handleKeyPress(event) {
     const keyVal = getKeyPress(event);
-    if (keyVal === 'invalid') {
+    if (keyVal[0] === 'invalid') {
       this.setState({
         message: 'invalid command'
       })
-    } else if (keyVal === 'up') {
-      if (rooms[roomNum].directions.includes(keyVal)) {
-        roomNum += 4;
+    } else if (keyVal[0] === 'up' || keyVal[0] === 'down' || keyVal[0] === 'left' || keyVal[0] === 'right') {
+      if (rooms[roomNum].directions.includes(keyVal[0])) {
+        roomNum += keyVal[1];
         this.setState({
           room: rooms[roomNum],
-          message: 'You went up.'
+          message: 'You went ' + keyVal[0]
         });
       } else {
         this.setState({
