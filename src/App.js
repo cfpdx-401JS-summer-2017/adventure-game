@@ -50,7 +50,19 @@ class App extends Component {
           errorMsg: 'You try to go ' + keyVal[0] + '. Bump! You hit a wall.'
         });
       }
-    }
+    } else if (keyVal[0] === 'p') {
+      if (rooms[roomNum].items.length > 0 && rooms[roomNum].items[0].hidden === false) {
+        this.setState({
+          gameMsg: 'ok',
+          errorMsg: ''
+        })
+      } else {
+        this.setState({
+          gameMsg: '',
+          errorMsg: 'Pick up what? Nothing here.'
+        });
+      }
+    } 
   }
 
   render() {
@@ -60,7 +72,10 @@ class App extends Component {
         <p>You are standing in a maze.</p>
         <Room room={room} />
         <Player player={player} />
-        <p>&gt; <input ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" onKeyDown={this.handleKeyPress} placeholder="&#8593;=up, &#8595;=down, &#8594;=right, &#8592;=left, p=pickup, d=drop, s=speak, u=use" value={this.state.value}></input></p>
+        <p id="input">
+          <span id="inputLeft">&gt;</span> 
+          <span id="inputRight"><textarea rows="2" ref={input => input && input.focus()} type="text" name="gameInput" className="gameInput" onKeyDown={this.handleKeyPress} placeholder="&#8593;=up, &#8595;=down, &#8594;=right, &#8592;=left, p=pickup, d=drop, s=speak, u=use" value={this.state.value}></textarea></span>
+        </p>
         <p>
           <span className="gameMsg">{this.state.gameMsg}</span>
           <span className="errorMsg">{this.state.errorMsg}</span>

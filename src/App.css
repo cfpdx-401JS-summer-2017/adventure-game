@@ -1,15 +1,19 @@
 #app p {
   margin: 1em;
 }
-input.gameInput {
+#input {display: table; width: 100%}
+#inputLeft {display: table-cell; vertical-align: top; width: 16px; padding-top: 5px;}
+#inputRight {display: table-cell; vertical-align: top; width: calc(100% - 16px);}
+textarea.gameInput {
   border: none;
   background: #227;
   color: #eee;
   font-family: 'Inconsolata', monospace;
   font-size: 1em;
-  width: 95%;
+  width: 100%;
+  resize: none;
 }
-input.gameInput:focus {
+textarea.gameInput:focus {
   outline: none;
 }
 .roomMsg  { color: #ff3; }
