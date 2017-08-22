@@ -44,16 +44,19 @@ class App extends Component {
 
   hasBean(bean) {
     const { room, player } = this.state;
-    return this.state.player.inventory.some(item => item === bean );
+    return this.state.player.inventory.some(item => item === bean);
 
   }
 
   checkWeakness(enemy, weakness) {
     const { room, player } = this.state;
-    if(player.inventory.some(item => item === weakness)){
+    if (player.inventory.some(item => item === weakness)) {
       this.handleKill(enemy);
     } else {
-      return <p> You are not equipped for this fight </p>;
+      // FIX THIS
+        <div>
+          <p> You are not equipped for this fight </p>
+        </div>
     }
   }
 
@@ -70,8 +73,8 @@ class App extends Component {
           onExit={this.handleExit}
           onPickup={this.handlePickup}
           onKill={this.handleKill}
-          hasBean = {this.hasBean}
-          checkWeakness = {this.checkWeakness}
+          hasBean={this.hasBean}
+          checkWeakness={this.checkWeakness}
         />
       </div>
     );
@@ -105,13 +108,13 @@ function Room({ room, onExit, onPickup, onKill, hasBean, checkWeakness }) {
         </p>
       }
       {hasBean('Magic Bean') &&
-      <p>{room.doors.map((door, i) =>{
-        return(
-          <button key={i} onClick={() => onExit(door)}>
-        Go to {door.name}
-      </button>
-      );
-      })}</p>
+        <p>{room.doors.map((door, i) => {
+          return (
+            <button key={i} onClick={() => onExit(door)}>
+              Go to {door.name}
+            </button>
+          );
+        })}</p>
       }
     </div>
   );
