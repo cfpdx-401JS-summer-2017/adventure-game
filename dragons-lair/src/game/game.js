@@ -1,13 +1,34 @@
 import React, { Component } from 'react';
-import { Player, ControlBar } from 'video-react';
+// import { Player, ControlBar } from 'video-react';
 import '../../node_modules/video-react/dist/video-react.css';
 import logo from './images/dragons-lair-logo.png';
+import acts from './acts.js';
 
 class Game extends Component {
 
     componentDidMount() {
-        document.getElementById('dragonPlayer').addEventListener('ended', this.props.handleVideoEnd);
+        document.getElementById('dragonPlayer').addEventListener('pause', this.props.handleVideoPause);
+        // document.getElementById('dragonPlayer').addEventListener('timeupdate', this.handleVideoTimeReached);
     }
+
+    // handleVideoTimeReached(){
+    //     let now = this.currentTime;
+
+    //     this.props.determineIfNeedToEvaluate(now);
+
+        // let stopTimes = [12, 24]; // get from current act/scene
+        // let correctMoves = [ "RIGHT", "SWORD"]; // get from current act/scene
+        // let userInput = "RIGHT"; // get from handleMove...
+        
+        // console.log("running event listener");
+        
+        // if(now >= stopTime) {
+        //     this.pause();
+        //     if (userInput === correctMoves[0]) {
+        //         this.play();
+        //     } else {}
+        // }
+    // }
 
     render() {
         return (
@@ -17,13 +38,12 @@ class Game extends Component {
                     <img src={logo} alt="Dragon's Lair" height="50px"/>
                     <br/>
 
-                    {/* <Player id="video-player" ref="dragonPlayer"
-                        autoPlay={true} onEnded={this.props.handleVideoEnd} >
+                    {/* <Player id="dragonPlayer"  autoPlay={true} >
                         <source src={this.props.videoSource} />
                         <ControlBar autoHide={true} />
                     </Player> */}
 
-                    <video controls={true} autoPlay id="dragonPlayer">
+                    <video controls={true} autoPlay id="dragonPlayer" height="600px">
                         <source src={this.props.videoSource} />
                     </video>
 
@@ -36,13 +56,11 @@ class Game extends Component {
                                 <th>Act</th>
                                 <th>Scene</th>
                                 <th>Lives</th>
-                                <th>Coins</th>
                             </tr>
                             <tr>
                                 <td>{this.props.act}</td>
                                 <td>{this.props.scene}</td>
                                 <td>{this.props.player.lives}</td>
-                                <td>{this.props.player.coins}</td>
                             </tr>
                         </tbody>
                     </table>
