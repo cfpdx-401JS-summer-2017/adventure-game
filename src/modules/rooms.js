@@ -56,7 +56,7 @@ const office = {
 };
 
 const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground];
-const items = ['cell phone', 'hall pass', 'math homework', 'banana peel', 'toilet paper statue', 'incriminating photograph', 'greasy pizza box'];
+const items = ['math homework', 'cell phone', 'hall pass', 'banana peel', 'toilet paper statue', 'embarrassing photograph', 'greasy pizza box', 'catapult','report card', 'empty spray paint can'];
 
 const maxItm = 3;
 

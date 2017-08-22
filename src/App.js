@@ -52,17 +52,30 @@ class App extends Component {
         console.log('hall pass = safe!');
         this.setState({princRoom: rooms[1], playerRoom: playerDest});
       } else {
-        console.log('time for a challenge!');
-        let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
-        console.log('pw: ', playerWin);
-        if(playerWin) {
-          this.setState({princRoom: rooms[1], playerRoom: playerDest});
+        console.log('time for a challenge!')
+        let playerContinue = Math.trunc((Math.random() * 10)) > 5 ? true : false;
+        console.log('pw: ', playerContinue);
+        if(playerContinue) {
+          this.setState({princRoom: rooms[1], playerRoom: playerDest})
         } else {
           console.log('game over!');
           return;
         }
       }
     }
+    if(player.inventory
+      .includes(
+        'cell phone',
+        'banana peel',
+        'toilet paper statue',
+        'embarrassing photograph',
+        'greasy pizza box',
+        'catapult',
+        'report card',
+        'empty spray paint can') 
+        && (playerRoom.key === 'westHall' || playerRoom.key === 'playground'))
+        console.log('Congratulations!');
+        //this.setState() TODO: add win screen
   }
 
   handlePickup(item) {
