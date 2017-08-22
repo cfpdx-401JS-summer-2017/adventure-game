@@ -31,7 +31,7 @@ class App extends Component {
 
   handleRoomRelations(playerDest) {
     const {player, princRoom, rooms, playerRoom} = this.state;
-    // console.log('playerDest in handling: playerDest: ', playerDest.key, 'playerRoom: ', playerRoom.key, 'princRoom: ', princRoom.key);
+      // TODO create princ in adjacent room warning
     if(playerRoom === princRoom) {
       // console.log('playerRoom === princRoom: ',playerRoom.key, princRoom.key)
       console.log('same room');
@@ -60,10 +60,7 @@ class App extends Component {
       let princDest = move(princRoom, playerDest)
       this.setState({princRoom: princDest})
       // console.log('playerRoom !== princRoom: ',playerRoom.key, princRoom.key)
-
     }
-
-
   }
 
   handlePickup(item) {
