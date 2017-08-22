@@ -30,14 +30,15 @@ class App extends Component {
 
   handleRoomRelations(playerDest) {
     const {player, princRoom, rooms, playerRoom} = this.state;
-    if(playerRoom !== princRoom) {
-      // console.log('not same room: ', princRoom,'play: ', playerDest )
+    if (playerDest === princRoom) {
+      this.setState({playerRoom: playerDest})
+    }
+    else if(playerRoom !== princRoom) {
       this.setState({playerRoom: playerDest})
       let princDest = move(princRoom, playerRoom)
       this.setState({princRoom: princDest})
-      // this.handleRoomRelations(playerRoom)
     }
-    else if(playerRoom ===  princRoom) {
+    else if(playerRoom === princRoom) {
       console.log('handling: ',playerRoom, princRoom)
       // console.log('same room');
       console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
