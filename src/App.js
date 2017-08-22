@@ -4,6 +4,8 @@ import Room from './modules/Room';
 import rooms from './modules/rooms';
 import chars from './modules/chars';
 import move from './modules/principal';
+import challenges from './modules/challenges'
+import Challenge from './modules/Challenge'
 import './App.css';
 
 // TODO passing in hall problem
@@ -23,7 +25,8 @@ class App extends Component {
       },
       player: chars.player,
       principal: chars.principal,
-      message: ''
+      message: '',
+      challenge: ''
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
@@ -41,14 +44,16 @@ class App extends Component {
         this.setState({princRoom: rooms[1], playerRoom: playerDest})
       } else {
         console.log('time for a challenge!')
-        let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
-        console.log('pw: ', playerWin);
-        if(playerWin) {
-          this.setState({princRoom: rooms[1], playerRoom: playerDest})
-        } else {
-          console.log('game over!')
-          return;
-        }
+        // let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
+        // console.log('pw: ', playerWin);
+        this.setState({message: challenges[0].question})
+
+        // if(playerWin) {
+        //   this.setState({princRoom: rooms[1], playerRoom: playerDest})
+        // } else {
+        //   console.log('game over!')
+        //   return;
+        // }
       }
     }
     else if (playerDest === princRoom) {
@@ -73,13 +78,6 @@ class App extends Component {
 
     let princDest = move(princRoom, playerRoom)
     this.setState({princRoom: princDest});
-
-    //     // console.log('2 in pickup - about to handle: ', princDest.key, playerRoom.key)
-
-    // this.setState({
-    //   player, princRoom:  princDest
-    // });
-    // this.handleRoomRelations(playerRoom)
   }
 
   render() {
@@ -95,6 +93,7 @@ class App extends Component {
       onExit={this.handleRoomRelations}
       onPickup={this.handlePickup}
       />
+      <Challenge challenge={this.state.challenge}/>
       <div className="warning">{this.state.message}</div>
       </div>
     );
