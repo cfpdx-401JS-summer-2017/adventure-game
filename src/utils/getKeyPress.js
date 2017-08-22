@@ -1,6 +1,4 @@
 
-import React from 'react';
-
 export default function getKeyPress(event) {
     switch (event.keyCode) {
         case 37: {
