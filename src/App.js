@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './true.png';
 import Room from './modules/Room';
 import rooms from './modules/rooms';
 import chars from './modules/chars';
@@ -20,29 +20,38 @@ class App extends Component {
       player: chars.player,
       principal: chars.principal
     };
-    this.handleExit = this.handleExit.bind(this);
     this.handlePickup = this.handlePickup.bind(this);
-
+    this.handleRoomRelations = this.handleRoomRelations.bind(this);
   }
 
-  handleExit(playerRoom) {
-    const {princRoom, player} = this.state;
-    let princDest = move(princRoom, playerRoom)
-    console.log('playerNow: ',playerRoom, 'princNow: ', princDest);
-    if(playerRoom === princDest) {
-      console.log('same room');
-      console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom)
+  handleRoomRelations(playerDest) {
+    const {player, princRoom, rooms, playerRoom} = this.state;
+    if(playerRoom !== princRoom) {
+      // console.log('not same room: ', princRoom,'play: ', playerDest )
+      this.setState({playerRoom: playerDest})
+      let princDest = move(princRoom, playerRoom)
+      this.setState({princRoom: princDest})
+      // this.handleRoomRelations(playerRoom)
+    }
+    else if(playerRoom ===  princRoom) {
+      console.log('handling: ',playerRoom, princRoom)
+      // console.log('same room');
+      console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key)
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
         console.log('hall pass = safe!');
-        this.setState({princRoom: rooms[1]})
-        this.handleExit(playerRoom);
+        this.setState({princRoom: rooms[1], playerRoom: playerDest})
       } else {
         console.log('time for a challenge!')
-        this.setState({princRoom: rooms[1]})
-        this.handleExit(playerRoom);
+        let playerWin = Math.trunc((Math.random() * 10)) > 5 ? true : false;
+        console.log('pw: ', playerWin);
+        if(playerWin) {
+          this.setState({princRoom: rooms[1], playerRoom: playerDest})
+        } else {
+          console.log('game over!')
+          return;
+        }
       }
     }
-    this.setState({ playerRoom: playerRoom, princRoom:  princDest });
   }
 
   handlePickup(item) {
@@ -52,16 +61,10 @@ class App extends Component {
     player.inventory.push(item);
     let princDest = move(princRoom, playerRoom)
     this.setState({
-      playerRoom, player, princRoom:  princDest
+      player, princRoom:  princDest
     });
-
+    this.handleRoomRelations(playerRoom)
   }
-
-  // handleRoomRelations
-
-
-
-
 
   render() {
     // console.log(player)
@@ -74,7 +77,7 @@ class App extends Component {
       <h6>{player.inventory.join(', ')}</h6>
       </div>
       <Room room={playerRoom}
-      onExit={this.handleExit}
+      onExit={this.handleRoomRelations}
       onPickup={this.handlePickup}
       />
       </div>
