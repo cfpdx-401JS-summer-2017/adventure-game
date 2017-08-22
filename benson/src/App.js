@@ -10,6 +10,8 @@ class App extends Component {
     this.state = {
       rooms,
       room: rooms[0],
+      initText: rooms[0].initText,
+      message: '',
       player: {
         name: 'Benson Wigglepuff',
         inventory: ['Sailor Cap', 'Fishnet Stockings']
@@ -23,7 +25,7 @@ class App extends Component {
   }
 
   handleExit(room) {
-    this.setState({ room });
+    this.setState({ room, initText:room.initText, message:'' });
   }
 
   handlePickup(item) {
@@ -31,15 +33,16 @@ class App extends Component {
     const index = room.items.indexOf(item);
     if (index > -1) room.items.splice(index, 1);
     player.inventory.push(item);
+    if (item === 'Burger') this.setState({message:'Benson finally has his aromatic burger. Excellent work, patriot.'})
     this.setState({ room, player })
   }
 
-  handleKill(enemies) {
+  handleKill(enemy) {
     const { room, player } = this.state;
-    const index = room.enemies.indexOf(enemies);
+    const index = room.enemies.indexOf(enemy);
     if (index > -1) room.enemies.splice(index, 1);
     room.enemies = null;
-    this.setState({ room, player });
+    this.setState({ room, player, initText:'', message: enemy.killText });
   }
 
   hasBean(bean) {
@@ -48,20 +51,20 @@ class App extends Component {
 
   }
 
-  checkWeakness(enemy, weakness) {
-    const { room, player } = this.state;
-    if (player.inventory.some(item => item === weakness)) {
+  checkWeakness(enemy) {
+    const { room, player, message } = this.state;
+    this.setState({message:''})
+    const index = player.inventory.indexOf(enemy.weakness)
+    if (index > -1) {
+      player.inventory.splice(index, 1)
       this.handleKill(enemy);
     } else {
-      // FIX THIS
-        <div>
-          <p> You are not equipped for this fight </p>
-        </div>
+      this.setState({message: 'Benson is not equipped for this fight.'})
     }
   }
 
   render() {
-    const { player, room } = this.state;
+    const { player, room, initText, message } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -70,6 +73,8 @@ class App extends Component {
           <h6>{player.inventory.join(', ')}</h6>
         </div>
         <Room room={room}
+          initText={initText}
+          message={message}
           onExit={this.handleExit}
           onPickup={this.handlePickup}
           onKill={this.handleKill}
@@ -81,11 +86,11 @@ class App extends Component {
   };
 }
 
-function Room({ room, onExit, onPickup, onKill, hasBean, checkWeakness }) {
+function Room({ room, message, initText, onExit, onPickup, onKill, hasBean, checkWeakness }) {
   return (
     <div>
       <h2>{room.name}</h2>
-      <p>{room.initText}</p>
+      <p>{initText}</p>
       {room.enemies &&
         <p>
           {room.enemies.map((enemy, i) => (
@@ -98,6 +103,7 @@ function Room({ room, onExit, onPickup, onKill, hasBean, checkWeakness }) {
           ))}
         </p>
       }
+      <p>{message}</p>
       {room.enemies === null &&
         <p>
           {room.items.map((item, i) => (

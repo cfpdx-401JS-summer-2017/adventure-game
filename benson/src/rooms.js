@@ -11,11 +11,11 @@ const field = {
 
 const foyer = {
     key: 'foyer',
-    name: 'Foyer',
+    name: 'Castle Entrance',
     items: [],
     enemies: null,
     doors: ['throne', 'hallway'],
-    initText: 'Having climbed the beanstalk, Benson spies a great castle resting atop the clouds. The smell of the divine burg is strong, and Benson soon finds himself in a grand foyer within the castle. Testing all the door handles,he finds that the only unlocked areas seem to be through a grand set of double-doors as tall as twenty Bensons, and an unassuming doorway that seems to lead further in.'
+    initText: 'Benson plants the magic bean and a great stalk sprouts, climbing up to the heavens. Having climbed the beanstalk, Benson spies a great castle resting atop the clouds. The smell of the divine burg is strong, and Benson finds himself in a grand foyer within the castle. Testing all the door handles,he finds that the only unlocked areas seem to be through a grand set of double-doors as tall as twenty Bensons, and an unassuming doorway that seems to lead further in.'
 };
 
 const hallway = {
@@ -24,7 +24,7 @@ const hallway = {
     items: [],
     enemies: null,
     doors: ['garage', 'lounge', 'foyer'],
-    initText: 'Benson steps through the less grandiose of his two options forward, and emerges in a hallway adorned with pictures of Nazi generals. A grim revelation that Benson\'s wrongdoers are of the lowest breed of criminal. A much lower breed than puggles such as Mr. Wigglepuff, which are a delightful breed of pup. Two doors stand out to Benson as viable options, one labeled Employee Lounge and one labeled Garage.'
+    initText: 'Benson finds himself in the hallway, which is adorned with pictures of Nazi generals. A grim revelation that Benson\'s wrongdoers are of the lowest breed of criminal. A much lower breed than puggles such as Mr. Wigglepuff, which are a delightful breed of pup. Two doors stand out to Benson as viable options, one labeled Employee Lounge and one labeled Garage.'
 };
 
 const garage = {
@@ -32,7 +32,8 @@ const garage = {
     name: 'Garage',
     items: ['Staplegun'],
     enemies: null,
-    doors: ['hallway']
+    doors: ['hallway'],
+    initText: 'Benson stands in a garage full of supply crates and floating space cars, for traveling the clouds. Among wrenches and screwdrivers, Benson sees a staple gun. He also sees no sign of his burger. All the grease in here is leaking from a space car, not from delicious beef.'
 };
 
 const lounge = {
@@ -40,7 +41,8 @@ const lounge = {
     name: 'Employee Lounge',
     items: ['Luger'],
     enemies: [enemies.jimbo],
-    doors: ['hallway']
+    doors: ['hallway'],
+    initText: 'Benson stands in an employee lounge, lit dimly by those awful flourescent tube lights.'
 };
 
 const throne = {
@@ -48,7 +50,8 @@ const throne = {
     name: 'Throne Room',
     items:['Burger'],
     enemies: [enemies.glaarg],
-    doors: ['foyer']
+    doors: ['foyer'],
+    initText: 'Benson stands in a throne room, the walls and ceiling plated with gold, and untold treasures piled high in the corners closest to the throne.'
 };
 
 const rooms = [field, foyer, hallway, garage, lounge, throne];
