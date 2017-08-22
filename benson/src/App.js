@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import rooms from './rooms';
-import enemies from './enemies';
+import rooms from './models/rooms';
+import enemies from './models/enemies';
+import burger from './img/burger.jpg';
 
 class App extends Component {
   constructor() {
@@ -12,6 +13,7 @@ class App extends Component {
       room: rooms[0],
       initText: rooms[0].initText,
       message: '',
+      image: '',
       player: {
         name: 'Benson Wigglepuff',
         inventory: ['Sailor Cap', 'Fishnet Stockings']
@@ -29,11 +31,11 @@ class App extends Component {
   }
 
   handlePickup(item) {
-    const { room, player } = this.state;
+    const { room, player, image } = this.state;
     const index = room.items.indexOf(item);
     if (index > -1) room.items.splice(index, 1);
     player.inventory.push(item);
-    if (item === 'Burger') this.setState({message:'Benson finally has his aromatic burger. Excellent work, patriot.'})
+    if (item === 'Burger') this.setState({image:burger, message:'Benson finally has his aromatic burger. Excellent work, patriot.'})
     this.setState({ room, player })
   }
 
@@ -64,7 +66,7 @@ class App extends Component {
   }
 
   render() {
-    const { player, room, initText, message } = this.state;
+    const { player, room, initText, image, message } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -74,6 +76,7 @@ class App extends Component {
         </div>
         <Room room={room}
           initText={initText}
+          image={image}
           message={message}
           onExit={this.handleExit}
           onPickup={this.handlePickup}
@@ -86,10 +89,11 @@ class App extends Component {
   };
 }
 
-function Room({ room, message, initText, onExit, onPickup, onKill, hasBean, checkWeakness }) {
+function Room({ room, image, message, initText, onExit, onPickup, onKill, hasBean, checkWeakness }) {
   return (
     <div>
       <h2>{room.name}</h2>
+      <img src={image}></img>
       <p>{initText}</p>
       {room.enemies &&
         <p>
