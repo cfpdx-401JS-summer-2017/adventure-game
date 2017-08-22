@@ -236,4 +236,6 @@ const acts = {
 // map the dictionary to an array
 let actsArray = Object.keys(acts).map((key) => acts[key]);
 
-export default actsArray;
+// export default actsArray;
+
+export default [acts.bridgeAndThreeDoors];
