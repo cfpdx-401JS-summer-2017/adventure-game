@@ -64,7 +64,7 @@ class App extends Component {
           player: player,
           gameMsg: 'You picked up ' + player.items[0] + '.',
           errorMsg: ''
-        })
+        });
       } else {
         this.setState({
           gameMsg: '',
@@ -75,7 +75,17 @@ class App extends Component {
     
     else if (keyVal[0] === 'd') {
       if (player.items.length > 0) {
-        // update what got dropped!
+        const itemObj = {
+          item: player.items[0],
+          hidden: false
+        }
+        rooms[roomNum].items.push(itemObj);
+        player.items = [];
+        this.setState({
+          player: player,
+          gameMsg: 'You dropped ' + rooms[roomNum].items[0].item + '.',
+          errorMsg: ''
+        });
       } else {
         this.setState({
           gameMsg: '',
