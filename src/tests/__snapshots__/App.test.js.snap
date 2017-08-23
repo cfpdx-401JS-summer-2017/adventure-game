@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a snapshot 1`] = `
+<div
+  className="App"
+>
+  <div
+    className="App-header"
+  >
+    <img
+      alt="logo"
+      className="App-logo"
+      src="true.png"
+    />
+    <h6>
+      Percy Prankster
+    </h6>
+    <h6>
+      
+    </h6>
+  </div>
+  <div
+    className="start"
+  >
+    <div
+      className="startWrapper"
+      style={
+        Object {
+          "backgroundColor": "white",
+          "height": "100%",
+          "width": "100%",
+          "zIndex": "100",
+        }
+      }
+    >
+      <h2>
+        Welcome to the Game of School
+      </h2>
+      <p>
+        You are the prime jokester at your school, but your glory days may be over. Unless you can gather all evidence of your pranks and dispose of it quickly, the principal will suspend you for good.
+      </p>
+      <p>
+        Search the rooms of your school for incriminating evidence. Pick up all of the items to win the game. If the principal catches you, use your wits to get free, or else you lose!
+      </p>
+      <button
+        onClick={[Function]}
+      >
+        Play the Game!
+      </button>
+      <br />
+      <img
+        alt="Map"
+        src="./worldMap.png"
+        style={
+          Object {
+            "maxWidth": 700,
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="game"
+  />
+  <div
+    className="win"
+  />
+  <div
+    className="lose"
+  />
+</div>
+`;
