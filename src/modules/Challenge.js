@@ -1,5 +1,4 @@
 import React from 'react';
-import challenges from './challenges';
 import PropTypes from 'prop-types';
 
 Challenge.propTypes = {
@@ -8,12 +7,8 @@ Challenge.propTypes = {
   onSubmit: PropTypes.func
 };
 
-Submit.propTypes = {
-  onSubmit: PropTypes.func
-};
-const challenge = challenges[0];
 
-export default function Challenge({ onSubmit }) {
+export default function Challenge({ challenge, onSubmit }) {
   return (
     <div className="visible">
       <div
@@ -32,6 +27,7 @@ export default function Challenge({ onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="A"
+            onChange={target => onSubmit(target)}
           />
         </label>
       </div>
@@ -42,6 +38,7 @@ export default function Challenge({ onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="B"
+            onChange={target => onSubmit(target)}
           />
         </label>
       </div>
@@ -52,6 +49,7 @@ export default function Challenge({ onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="C"
+            onChange={target => onSubmit(target)}
           />
         </label>
       </div>
@@ -62,25 +60,20 @@ export default function Challenge({ onSubmit }) {
             type="radio"
             name="challengeAnswer"
             value="D"
+            onChange={target => onSubmit(target)}
           />
         </label>
       </div>
-      <Submit value={challenge} onSubmit={value => onSubmit(value)}/>
-    </div>
-  );
-}
-
-export function Submit({ onSubmit }) {
-  return (
-    <div className="choices">
+      <div className="choices">
       <label>
         Submit
-        <input
+        <button
           name="submit"
-          type="button"
-          onClick={value => onSubmit(value)}
+          value={challenge.correctAnswer}
+          onClick={target => onSubmit(target)}
         />
       </label>
+    </div>
     </div>
   );
 }

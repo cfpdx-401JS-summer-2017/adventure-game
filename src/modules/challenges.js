@@ -5,7 +5,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -14,7 +14,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -23,7 +23,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },  {
     question: 'What is 2 + 2? num4',
@@ -31,7 +31,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -40,7 +40,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -49,7 +49,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -58,7 +58,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -67,7 +67,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -76,7 +76,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   },
   {
@@ -85,7 +85,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    corectAnswer: 'A',
+    correctAnswer: 'A',
     state: 'incorrect'
   }
 ]
