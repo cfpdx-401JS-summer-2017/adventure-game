@@ -10,7 +10,7 @@ exports[`renders a snapshot 1`] = `
     <img
       alt="logo"
       className="App-logo"
-      src="logo.svg"
+      src="true.png"
     />
     <h6>
       Percy Prankster
@@ -25,6 +25,16 @@ exports[`renders a snapshot 1`] = `
     </h2>
     <p>
       You see: 
+      <button
+        onClick={[Function]}
+      >
+        incriminating photograph
+      </button>
+      <button
+        onClick={[Function]}
+      >
+        greasy pizza box
+      </button>
     </p>
     <button
       onClick={[Function]}

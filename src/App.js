@@ -5,11 +5,17 @@ import rooms from './modules/rooms';
 import chars from './modules/chars';
 import move from './modules/principal';
 import {Start, Win, Lose} from './modules/screens';
+import challenges from './modules/challenges';
+import Challenge from './modules/Challenge';
+
 import './App.css';
+
+// TODO adjacent room warning
 
 class App extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       screen: 'startScreen',
       // win: null,
@@ -21,7 +27,11 @@ class App extends Component {
         name: ''
       },
       player: chars.player,
-      principal: chars.principal
+      principal: chars.principal,
+      playerAnswer: '',
+      challenge: {},
+      visible: false,
+      win: false
     };
     this.initialState = this.state;
     this.handlePickup = this.handlePickup.bind(this);
@@ -35,7 +45,8 @@ class App extends Component {
   }
 
   handleRoomRelations(playerDest) {
-    const {player, princRoom, rooms, playerRoom} = this.state;
+    this.setState({win:false});
+    const { player, princRoom, rooms, playerRoom } = this.state;
     if(playerRoom !== princRoom) {
       console.log('not same room: ', 'player is in this room: ', playerRoom);
       this.setState({playerRoom: playerDest});
@@ -52,16 +63,17 @@ class App extends Component {
         this.setState({princRoom: rooms[1], playerRoom: playerDest});
       } else {
         console.log('time for a challenge!');
-        let playerContinue = Math.trunc((Math.random() * 10)) > 5 ? true : false;
-        console.log('player continue value: ', playerContinue);
-        if(playerContinue) {
-          this.setState({princRoom: rooms[1], playerRoom: playerDest});
-        } else {
-          console.log('game over!');
-          this.setState({ screen: 'loseScreen' });
-          return;
+         let index = Math.trunc(Math.random() * 10);
+        this.setState({ visible: true });
+        this.setState({ challenge: challenges[index] });
         }
       }
+    } else if (playerDest === princRoom) {
+      this.setState({ playerRoom: playerDest });
+    } else if (playerDest !== princRoom) {
+      this.setState({ playerRoom: playerDest });
+      let princDest = move(princRoom, playerDest);
+      this.setState({ princRoom: princDest });
     }
     if(player.inventory.length >= 9
       
@@ -90,29 +102,51 @@ class App extends Component {
 
   handlePickup(item) {
     const { playerRoom, player, princRoom } = this.state;
+    this.handleRoomRelations(playerRoom);
     const index = playerRoom.items.indexOf(item);
     if (index > -1) playerRoom.items.splice(index, 1);
     player.inventory.push(item);
     let princDest = move(princRoom, playerRoom);
-    this.setState({
-      player, princRoom:  princDest
-    });
-    this.handleRoomRelations(playerRoom);
+    this.setState({ princRoom: princDest });
+  }
+
+  handleChallengeAnswer({ target }) {
+    this.setState({ playerAnswer: target.value });
+    const { challenge, playerAnswer, win } = this.state;
+    if (target.name === 'submit') {
+      if (
+        playerAnswer === challenge.correctAnswer &&
+        target.name === 'submit'
+      ) {
+        this.setState({ visible: false });
+        this.setState({ win: true });
+        this.setState({ princRoom: rooms[1] });
+      } else {
+          this.setState({ screen: 'loseScreen' });
+      }
+    }
+
   }
 
   render() {
-    // console.log(player)
-    const { player, playerRoom } = this.state;
+    const {
+      player,
+      playerRoom,
+      challenge,
+      visible,
+      playerAnswer,
+      win
+    } = this.state;
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-        </div>
+
         <div className="start">
           {this.state.screen === 'startScreen' && <Start onStart={this.changeScreen} />}
         </div>
         <div className="game">
-          {this.state.screen === 'gameScreen' && 
+          {this.state.screen === 'gameScreen' && visible !== true &&
           <div> 
             <h6>{player.name}</h6>
             <h6>{player.inventory.join(', ')}</h6>
@@ -121,7 +155,13 @@ class App extends Component {
               onPickup={this.handlePickup}
             />
           </div>}
-        </div>
+        {win && <div className="win">You are correct!</div>}
+        {visible &&
+          <Challenge
+            challenge={challenge}
+            value={playerAnswer}
+            onSubmit={target => this.handleChallengeAnswer(target)}
+          />}
         <div className="win">
           {this.state.screen === 'winScreen' && 
           <div>
@@ -138,7 +178,4 @@ class App extends Component {
     );
   }
 }
-
-
-
 export default App;
