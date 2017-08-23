@@ -3,11 +3,3 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
-
-.visibleChallenge {
-  display: block;
-}
-
-.invisibleChallenge {
-  display: none;
-}

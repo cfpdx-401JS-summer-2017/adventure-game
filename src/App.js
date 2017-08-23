@@ -26,16 +26,17 @@ class App extends Component {
       principal: chars.principal,
       playerAnswer: '',
       challenge: {},
-      visible: false
+      visible: false,
+      win: false
     };
     this.handlePickup = this.handlePickup.bind(this);
     this.handleRoomRelations = this.handleRoomRelations.bind(this);
   }
 
   handleRoomRelations(playerDest) {
-    const { player, princRoom, rooms, playerRoom} = this.state;
+    this.setState({win:false});
+    const { player, princRoom, rooms, playerRoom } = this.state;
     if (playerRoom === princRoom) {
-      console.log('same room');
       if (
         player.inventory.includes('hall pass') &&
         (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')
@@ -45,7 +46,6 @@ class App extends Component {
         let index = Math.trunc(Math.random() * 10);
         this.setState({ visible: true });
         this.setState({ challenge: challenges[index] });
-        this.setState({ playerDest: playerRoom })
       }
     } else if (playerDest === princRoom) {
       this.setState({ playerRoom: playerDest });
@@ -66,47 +66,58 @@ class App extends Component {
     this.setState({ princRoom: princDest });
   }
 
-  handleChallengeAnswer({target}) {
+  handleChallengeAnswer({ target }) {
     this.setState({ playerAnswer: target.value });
-    const { challenge, playerAnswer } = this.state;
-    if(target.name === 'submit') {
-      if (playerAnswer === challenge.correctAnswer && target.name==='submit') {
+    const { challenge, playerAnswer, win } = this.state;
+    if (target.name === 'submit') {
+      if (
+        playerAnswer === challenge.correctAnswer &&
+        target.name === 'submit'
+      ) {
         this.setState({ visible: false });
-        this.setState({ princRoom: rooms[1]});
-      }
-      else {
+        this.setState({ win: true });
+        this.setState({ princRoom: rooms[1] });
+      } else {
         console.log('game over!');
       }
     }
   }
 
   render() {
-    const { player, playerRoom, challenge, visible, playerAnswer } = this.state;
+    const {
+      player,
+      playerRoom,
+      challenge,
+      visible,
+      playerAnswer,
+      win
+    } = this.state;
     return (
       <div className="App">
-      <div className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <h6>
-      {player.name}
-      </h6>
-      <h6>
-      {player.inventory.join(', ')}
-      </h6>
-      </div>
-      <Room
-      room={playerRoom}
-      onExit={this.handleRoomRelations}
-      onPickup={this.handlePickup}
-      />
-      {visible &&
-        <Challenge
-        challenge={challenge}
-        value={playerAnswer}
-        onSubmit={target => this.handleChallengeAnswer(target)}
-        />}
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h6>
+            {player.name}
+          </h6>
+          <h6>
+            {player.inventory.join(', ')}
+          </h6>
         </div>
-      );
-    }
+        {visible !== true &&
+          <Room
+            room={playerRoom}
+            onExit={this.handleRoomRelations}
+            onPickup={this.handlePickup}
+          />}
+        {win && <div className="win">You are correct!</div>}
+        {visible &&
+          <Challenge
+            challenge={challenge}
+            value={playerAnswer}
+            onSubmit={target => this.handleChallengeAnswer(target)}
+          />}
+      </div>
+    );
   }
-
-  export default App;
+}
+export default App;

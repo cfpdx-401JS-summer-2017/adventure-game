@@ -5,8 +5,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    correctAnswer: 'A',
-    state: 'incorrect'
+    correctAnswer: 'A'
   },
   {
     question: 'What is 2 + 2 num2?',
@@ -14,8 +13,7 @@ const challenges =  [
     answerB: '5',
     answerC: '6',
     answerD: '8',
-    correctAnswer: 'A',
-    state: 'incorrect'
+    correctAnswer: 'A'
   },
   {
     question: 'What is 2 + 2 num3?',

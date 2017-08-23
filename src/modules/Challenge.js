@@ -17,9 +17,7 @@ export default function Challenge({ challenge, onSubmit }) {
         value="challengeQuestion">
         {challenge.question}
       </div>
-      <div className="answer" name="challengeAnswer" value="challengeAnswer">
-        You are {challenge.state}! The answer is {challenge.answer}
-      </div>
+
       <div className="choices">
         <label>
           {challenge.answerA}
