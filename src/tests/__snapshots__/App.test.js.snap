@@ -19,41 +19,54 @@ exports[`renders a snapshot 1`] = `
       
     </h6>
   </div>
-  <div>
-    <h2>
-      West Hall
-    </h2>
-    <p>
-      You see: 
+  <div
+    className="start"
+  >
+    <div
+      className="startWrapper"
+      style={
+        Object {
+          "backgroundColor": "white",
+          "height": "100%",
+          "width": "100%",
+          "zIndex": "100",
+        }
+      }
+    >
+      <h2>
+        Welcome to the Game of School
+      </h2>
+      <p>
+        You are the prime jokester at your school, but your glory days may be over. Unless you can gather all evidence of your pranks and dispose of it quickly, the principal will suspend you for good.
+      </p>
+      <p>
+        Search the rooms of your school for incriminating evidence. Pick up all of the items to win the game. If the principal catches you, use your wits to get free, or else you lose!
+      </p>
       <button
         onClick={[Function]}
       >
-        incriminating photograph
+        Play the Game!
       </button>
-      <button
-        onClick={[Function]}
-      >
-        greasy pizza box
-      </button>
-    </p>
-    <button
-      onClick={[Function]}
-    >
-      Door to 
-      cafeteria
-    </button>
-    <button
-      onClick={[Function]}
-    >
-      Door to 
-      mathRoom
-    </button>
-    <button
-      onClick={[Function]}
-    >
-      Door to 
-      eastHall
-    </button>
+      <br />
+      <img
+        alt="Map"
+        src="./worldMap.png"
+        style={
+          Object {
+            "maxWidth": 700,
+          }
+        }
+      />
+    </div>
   </div>
+  <div
+    className="game"
+  />
+  <div
+    className="win"
+  />
+  <div
+    className="lose"
+  />
 </div>
 `;

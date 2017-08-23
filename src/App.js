@@ -56,18 +56,17 @@ class App extends Component {
     }
     else if(playerRoom ===  princRoom) {
       console.log('handling: ',playerRoom, princRoom);
-      // console.log('same room');
       console.log('testing hall pass: ', player.inventory, 'pr: ',playerRoom.key);
       if(player.inventory.includes('hall pass') && (playerRoom.key === 'westHall' || playerRoom.key === 'eastHall')) {
         console.log('hall pass = safe!');
         this.setState({princRoom: rooms[1], playerRoom: playerDest});
       } else {
         console.log('time for a challenge!');
+        this.setState({playerRoom: playerDest})
          let index = Math.trunc(Math.random() * 10);
         this.setState({ visible: true });
         this.setState({ challenge: challenges[index] });
         }
-      }
     } else if (playerDest === princRoom) {
       this.setState({ playerRoom: playerDest });
     } else if (playerDest !== princRoom) {
@@ -76,24 +75,6 @@ class App extends Component {
       this.setState({ princRoom: princDest });
     }
     if(player.inventory.length >= 9
-      
-      // every(function (element, index, array) { ['cell phone',
-      // 'banana peel',
-      // 'toilet paper statue',
-      // 'embarrassing photograph',
-      // 'greasy pizza box',
-      // 'catapult',
-      // 'report card',
-      // 'empty spray paint can'].includes(element); })
-      // .includes(
-      //   'cell phone',
-      //   'banana peel',
-      //   'toilet paper statue',
-      //   'embarrassing photograph',
-      //   'greasy pizza box',
-      //   'catapult',
-      //   'report card',
-      //   'empty spray paint can') 
         && (playerDest.key === 'westHall' || playerDest.key === 'playground')) {
       console.log('Congratulations!');
       this.setState({ screen: 'winScreen' });
@@ -135,46 +116,48 @@ class App extends Component {
       challenge,
       visible,
       playerAnswer,
-      win
+      win,
+      screen
     } = this.state;
     return (
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-
+          <h6>{player.name}</h6>
+            <h6>{player.inventory.join(', ')}</h6>
+            </div>
         <div className="start">
           {this.state.screen === 'startScreen' && <Start onStart={this.changeScreen} />}
         </div>
         <div className="game">
           {this.state.screen === 'gameScreen' && visible !== true &&
-          <div> 
-            <h6>{player.name}</h6>
-            <h6>{player.inventory.join(', ')}</h6>
+          <div>
             <Room room={playerRoom}
               onExit={this.handleRoomRelations}
               onPickup={this.handlePickup}
             />
           </div>}
         {win && <div className="win">You are correct!</div>}
-        {visible &&
+        {visible && screen === 'gameScreen' &&
           <Challenge
             challenge={challenge}
             value={playerAnswer}
             onSubmit={target => this.handleChallengeAnswer(target)}
           />}
+          </div>
         <div className="win">
-          {this.state.screen === 'winScreen' && 
+          {screen === 'winScreen' &&
           <div>
             <Win onWin={this.changeScreen} />
-          </div>} 
+          </div>}
         </div>
         <div className="lose">
-          {this.state.screen === 'loseScreen' && 
+          {screen === 'loseScreen' &&
           <div>
             <Lose onLose={this.changeScreen} />
           </div> }
         </div>
-      </div>
+</div>
     );
   }
 }

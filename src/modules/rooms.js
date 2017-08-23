@@ -31,7 +31,7 @@ const westHall = {
   key: 'westHall',
   name: 'West Hall',
   items: [],
-  doors: ['cafeteria', 'mathRoom', 'eastHall']
+  doors: ['cafeteria', 'mathRoom', 'eastHall', 'scienceLab']
 };
 
 const mathRoom = {
@@ -45,26 +45,26 @@ const artRoom = {
   key: 'artRoom',
   name: 'Painting for People',
   items: [],
-  doors: ['mathRoom', 'eastHall']
+  doors: ['mathRoom', 'eastHall', 'office']
 };
 
 const office = {
   key: 'office',
   name: 'Principal\'s Office',
   items: [],
-  doors: ['eastHall']
+  doors: ['eastHall', 'artRoom']
 };
 const scienceLab = {
   key: 'scienceLab',
   name: 'Science Lab',
   items: [],
-  doors: ['westHall,garden']
+  doors: ['westHall','garden']
 };
 const garden = {
   key: 'garden',
   name: 'Garden',
   items: [],
-  doors:[scienceLab]
+  doors:['scienceLab']
 }
 
 const rooms = [westHall, office, cafeteria, gym, eastHall, artRoom, mathRoom, playground, garden, scienceLab];

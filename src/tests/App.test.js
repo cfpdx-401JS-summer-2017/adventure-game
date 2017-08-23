@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
+
 import App from '../App';
 import renderer from 'react-test-renderer';
 
@@ -13,6 +15,9 @@ it('renders a snapshot', () => {
   const tree = renderer.create(<App/>).toJSON();
   expect(tree).toMatchSnapshot();
 });
-// it('Player and Principal start in right spots', () => {
-//   const wrapper = shallow(<)
-// })
+
+it('player and principal start in right spots', () => {
+  const wrapper = shallow(<App />);
+  expect(wrapper.state().playerRoom.key === 'westHall')
+  expect(wrapper.state().princRoom.key === 'office')
+})

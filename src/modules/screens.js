@@ -12,7 +12,7 @@ export function Start({onStart}) {
       </p>
       <button onClick={() => onStart()}>Play the Game!</button>
       <br/>
-      <img style={{ maxWidth: '700' }} alt="Map" src="./worldMap.png" />
+      <img style={{ maxWidth: 700 }} alt="Map" src="./worldMap.png" />
     </div>
   );
 }
