@@ -5,7 +5,6 @@ const playground = {
   items: [],
   doors: ['gym']
 };
-
 const cafeteria = {
   key: 'cafeteria',
   name: 'Food Trough',
