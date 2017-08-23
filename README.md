@@ -1,32 +1,24 @@
-<img src="https://cloud.githubusercontent.com/assets/478864/22186847/68223ce6-e0b1-11e6-8a62-0e3edc96725e.png" 
-width=30> Adventure Game
-===
+# Feed The Tiger
 
-Create a component based adventure game! For this assignment you'll be creating a 
-an adventure game ala Zork or choose your own adventure, or whatever you dream up.
+By [Anwar Montasir](https://github.com/anwarmontasir) and [Pierre Shabani](https://github.com/jshabani)
 
-**Work in teams of 2 for this project**
+## Description
 
-* This game should have _at least_ five rooms or scenes that the player can move between. 
+You are a character in a maze. In every room you will have choices of direction to travel (Up, Down, Left, Right).
 
-* Have at least one item that the player can interact and at least one monster or character
-the player defeats or interacts with.
+In some rooms you will interact with other characters, and exchange objects.
 
-* You need to provide ways for user to specify what they want to do (button, input, etc) 
+Your goal is to feed the tiger, the guardian of the maze and exit through the door behind him.
 
-* Test your components with snapshot testing
+## How the maze works
 
-* You haven't yet learned how to use things like a router or some of the higher level state management
-techniques available in React. Just use what you know plus JavaScript know-how to orchestrate changes through the game.
+At any given moments your options are 
 
-* The goal is to jump into React and try and build something more complex!
-
-## Bonus
-
-* Persist the data in localStorage to survive a browser refresh
-
-## Rubric
-* Functionally Correct (not buggy) *5pts*
-* Game Creativity *5pts*
-* Idiomatic use of React: *5pts*
-* React Components and Functions: *5pts* 
+- Move Up
+- Move Down
+- Move Right
+- Move Left
+- Pick up an item, provided there is one on the ground.
+- Drop an item, if you're carrying anything.
+- Use an item, if you're carrying anything.
+- Speak, if you encounter another character.
