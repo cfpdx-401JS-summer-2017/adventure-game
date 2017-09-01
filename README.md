@@ -1,3 +1,22 @@
+# Dragon's Lair 2017!
+
+# 
+
+## About
+
+ReactJS re-creation of the infamous 1980 laserdisk game _Dragon's Lair_
+
+## How to Play
+
+...
+
+## Resources
+
+<http://www.dragons-lair-project.com/>
+<http://www.classicgaming.cc/classics/dragons-lair/>
+
+
+
 <img src="https://cloud.githubusercontent.com/assets/478864/22186847/68223ce6-e0b1-11e6-8a62-0e3edc96725e.png" 
 width=30> Adventure Game
 ===
